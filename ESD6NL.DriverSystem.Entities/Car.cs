@@ -4,11 +4,12 @@ using System.Text;
 
 namespace ESD6NL.DriverSystem.Entities
 {
-    class Car
+    public class Car
     {
-        private long carTrackerId { get; set; }
-        private string licencePlate { get; set; }
-        private RDW rdwData { get; set; }
-        private RDWFuel rdwFuelData { get; set; }
+        public int CarID { get; set; }
+        public int carTrackerID { get; set; }
+        public string licencePlate { get; set; }
+        public RDW rdwData { get; set; }
+        public RDWFuel rdwFuelData { get; set; }
     }
 }

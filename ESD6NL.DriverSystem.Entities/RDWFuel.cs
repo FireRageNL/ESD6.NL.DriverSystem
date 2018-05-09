@@ -4,7 +4,8 @@ using System.Text;
 
 namespace ESD6NL.DriverSystem.Entities
 {
-    class RDWFuel
+    public class RDWFuel
     {
+        public int RDWFuelID { get; set; }
     }
 }

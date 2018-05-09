@@ -4,8 +4,9 @@ using System.Text;
 
 namespace ESD6NL.DriverSystem.Entities
 {
-    class RDW
+    public class RDW
     {
+        public int RdwID { get; set; }
         private string aantal_cilinders;
         private string aantal_deuren;
         private string aantal_rolstoelplaatsen;

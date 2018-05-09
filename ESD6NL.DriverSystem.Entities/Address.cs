@@ -4,12 +4,13 @@ using System.Text;
 
 namespace ESD6NL.DriverSystem.Entities
 {
-    class Address
+    public class Address
     {
-        private string town { get; set; }
-        private string street { get; set; }
-        private int number { get; set; }
-        private string zipCode { get; set; }
+        public int AddressID { get; set; }
+        public string town { get; set; }
+        public string street { get; set; }
+        public int number { get; set; }
+        public string zipCode { get; set; }
 
     }
 }
