@@ -4,12 +4,13 @@ using System.Text;
 
 namespace ESD6NL.DriverSystem.Entities
 {
-    class Invoice
+    public class Invoice
     {
-        private long invoiceNumber { get; set; }
-        private PaymentStatus paymentStatus { get; set; }
-        private DateTime period { get; set; }
-        private Decimal totalAmount { get; set; }
-        private string filePath { get; set; }
+        public int invoiceID { get; set; }
+        public long invoiceNumber { get; set; }
+        public PaymentStatus paymentStatus { get; set; }
+        public DateTime period { get; set; }
+        public Decimal totalAmount { get; set; }
+        public string filePath { get; set; }
     }
 }

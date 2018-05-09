@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ESD6NL.DriverSystem.Entities
 {
-    enum PaymentStatus
+    public enum PaymentStatus
     {
         Paid,
         Open,
