@@ -4,7 +4,7 @@ pipeline{
         stage('Build project'){
             steps {
                 sh 'dotnet restore'
-				sh 'dotnet build'
+				sh 'dotnet msbuild'
             }
         }
     }
