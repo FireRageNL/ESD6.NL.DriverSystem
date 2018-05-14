@@ -25,7 +25,7 @@ namespace ESD6NL.DriverSystem
         {
             services.AddMvc();
 
-            services.AddDbContext<DriverSystemContext>(options => options.UseMySql("server=localhost;Database=test;UID=root;Password=root"));
+            services.AddDbContext<DriverSystemContext>(options => options.UseMySql("server=35.195.239.181;Database=driversystem;UID=root;Password=root"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
