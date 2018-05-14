@@ -12,9 +12,10 @@ using System;
 namespace ESD6NL.DriverSystem.DAL.Migrations
 {
     [DbContext(typeof(DriverSystemContext))]
-    partial class DriverSystemContextModelSnapshot : ModelSnapshot
+    [Migration("20180514113521_AddedRowEntityAndEditedTheKMToDecimal")]
+    partial class AddedRowEntityAndEditedTheKMToDecimal
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
