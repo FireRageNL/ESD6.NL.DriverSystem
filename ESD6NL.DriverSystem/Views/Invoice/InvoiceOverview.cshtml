@@ -1,7 +1,41 @@
-﻿
+﻿@model ESD6NL.DriverSystem.Models.UserViewModel
+
 @{
-    ViewData["Title"] = "InvoiceOverview";
+    ViewData["Title"] = "Facturen";
 }
 
-<h2>InvoiceOverview</h2>
+<h2>Facturen</h2>
+
+<table class="table  table table-striped table-bordered table-responsive table-condensed">
+    <thead>
+        <tr>
+            <th><a asp-action="InvoiceOverview" asp-route-id="">Factuur</a></th>
+            <th><a asp-action="InvoiceOverview" asp-route-id="">Datum</a></th>
+            <th><a asp-action="InvoiceOverview" asp-route-id="">Totaal kilometers gereden</a></th>
+            <th><a asp-action="InvoiceOverview" asp-route-id="">Totaal bedrag</a></th>
+            <th><a asp-action="InvoiceOverview" asp-route-id="">Status</a></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @*@{
+            foreach (var invoice in Model.invoices)
+            {
+                <text>
+
+        <tr>
+            <td>@invoice.invoiceNumber</td>
+            <td>@invoice.period</td>
+            <td>@invoice.totalKm</td>
+            <td>@invoice.totalAmount</td>
+            <td>@invoice.paymentStatus</td>
+        </tr>
+
+                </text>
+
+            }
+        }*@
+
+    </tbody>
+</table>
 
