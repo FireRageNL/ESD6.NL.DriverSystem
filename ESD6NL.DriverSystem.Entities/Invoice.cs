@@ -10,7 +10,7 @@ namespace ESD6NL.DriverSystem.Entities
         public long invoiceNumber { get; set; }
         public PaymentStatus paymentStatus { get; set; }
         public DateTime period { get; set; }
-        public int totalKm { get; set; }
+        public Decimal totalKm { get; set; }
         public Decimal totalAmount { get; set; }
         public string filePath { get; set; }
     }
