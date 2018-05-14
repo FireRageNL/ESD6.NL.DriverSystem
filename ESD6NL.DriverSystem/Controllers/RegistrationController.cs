@@ -2,14 +2,24 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ESD6NL.DriverSystem.BLL;
 using ESD6NL.DriverSystem.Models;
 using Microsoft.AspNetCore.Mvc;
 using ESD6NL.DriverSystem.Entities;
+using Microsoft.AspNetCore.Identity;
 
 namespace ESD6NL.DriverSystem.Controllers
 {
     public class RegistrationController : Controller
     {
+       
+        private IRegistrationService _regSerivce;
+
+        public RegistrationController(IRegistrationService regSerivce)
+        {
+            _regSerivce = regSerivce;
+        }
+
         /// <summary>
         /// Display of the registration view
         /// </summary>
@@ -28,6 +38,8 @@ namespace ESD6NL.DriverSystem.Controllers
         [HttpPost]
         public IActionResult Index(RegistrationModel model)
         {
+            Entities.User toAdd = new User {email = model.Email, userName = model.Username, password = model.Password};
+            _regSerivce.createUser(toAdd);
             return Redirect("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
         }
     }

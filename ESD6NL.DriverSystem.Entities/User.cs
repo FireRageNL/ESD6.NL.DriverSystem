@@ -7,6 +7,11 @@ namespace ESD6NL.DriverSystem.Entities
 {
     public class User
     {
+        public User()
+        {
+            //Amazing empty constructor 
+        }
+
         public int userID { get; set; }
         public string email { get; set; }
         public string userName { get; set; }
