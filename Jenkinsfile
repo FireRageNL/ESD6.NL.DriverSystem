@@ -13,14 +13,11 @@ pipeline{
 			}
 		}
 		stage('Execute SonarQube Scanner'){
-			steps{
 			    def sqScannerMsBuildHome = tool 'scanner'
 				withSonarQubeEnv('sonarqube') {
-
 				sh "${sqScannerMsBuildHome} begin /k:'Project-test' /d:sonar.host.url=http://192.168.25.121:9000 /d:sonar.login=33d2bf0931e4ba870789a1cf8e6276a20de55fe1'"
 				sh "dotnet build"
 				sh "${sqScannerMsBuildHome} end"
-			}
 			}
 		}
     }
