@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using ESD6NL.DriverSystem.BLL;
 using ESD6NL.DriverSystem.DAL;
@@ -38,7 +39,10 @@ namespace ESD6NL.DriverSystem
                     options.LoginPath = "/Home/Index";
                     options.LogoutPath = "/Home/Logout";
                 });
-
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("LoggedInOnly", policy => policy.RequireClaim(ClaimTypes.Name));
+            });
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
         }
 
