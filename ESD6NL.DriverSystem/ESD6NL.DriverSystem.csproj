@@ -20,13 +20,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\Car\css\" />
-    <Folder Include="Views\Home\css\" />
-    <Folder Include="Views\Invoice\css\" />
-    <Folder Include="Views\Registration\css\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Include="wwwroot\css\Home.css" />
   </ItemGroup>
 

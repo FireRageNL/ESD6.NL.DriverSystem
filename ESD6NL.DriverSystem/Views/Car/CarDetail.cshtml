@@ -1,0 +1,52 @@
+﻿@model ESD6NL.DriverSystem.Models.CarViewModel
+
+@{
+    ViewData["Title"] = "CarDetail";
+}
+
+<h2>Auto met kenteken @Html.DisplayFor(model => model.car.rdwData.kenteken)</h2>
+
+<table class="table  table table-striped table-bordered table-responsive table-condensed">
+    <tbody>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.car.rdwData.merk)</td>
+            <td>@Html.DisplayFor(model => model.car.rdwData.merk)</td>
+        </tr>
+
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.car.rdwData.voertuigsoort)</td>
+            <td>@Html.DisplayFor(model => model.car.rdwData.voertuigsoort)</td>
+        </tr>
+
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.car.rdwData.zuinigheidslabel)</td>
+            <td>@Html.DisplayFor(model => model.car.rdwData.zuinigheidslabel)</td>
+        </tr>
+
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.car.rdwData.api_gekentekende_voertuigen_brandstof)</td>
+            <td>@Html.DisplayFor(model => model.car.rdwData.api_gekentekende_voertuigen_brandstof)</td>
+        </tr>
+
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.car.rdwData.tweede_kleur)</td>
+            <td>@Html.DisplayFor(model => model.car.rdwData.tweede_kleur)</td>
+        </tr>
+
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.car.rdwData.aantal_deuren)</td>
+            <td>@Html.DisplayFor(model => model.car.rdwData.aantal_deuren)</td>
+        </tr>
+
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.car.rdwData.aantal_zitplaatsen)</td>
+            <td>@Html.DisplayFor(model => model.car.rdwData.aantal_zitplaatsen)</td>
+        </tr>
+
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.car.rdwData.aantal_rolstoelplaatsen)</td>
+            <td>@Html.DisplayFor(model => model.car.rdwData.aantal_rolstoelplaatsen)</td>
+        </tr>
+
+    </tbody>
+</table>
