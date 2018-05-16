@@ -7,7 +7,7 @@ using System.Text;
 
 namespace ESD6NL.DriverSystem.BLL.Implementations
 {
-    class InvoiceService : IInvoiceService
+    public class InvoiceService : IInvoiceService
     {
         private IInvoiceRepository _repo;
 

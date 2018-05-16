@@ -4,7 +4,11 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using ESD6NL.DriverSystem.BLL;
+using ESD6NL.DriverSystem.BLL.Implementations;
+using ESD6NL.DriverSystem.BLL.Interfaces;
 using ESD6NL.DriverSystem.DAL;
+using ESD6NL.DriverSystem.DAL.Implementations;
+using ESD6NL.DriverSystem.DAL.Interfaces;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -32,6 +36,8 @@ namespace ESD6NL.DriverSystem
 
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<IInvoiceService, InvoiceService>();
+            services.AddTransient<IInvoiceRepository, InvoiceRepository>();
 
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options =>
