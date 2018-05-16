@@ -2,8 +2,10 @@
 
 namespace ESD6NL.DriverSystem.BLL
 {
-    public interface IRegistrationService
+    public interface IUserService
     {
         User createUser(User toSave);
+
+        bool checkUserLogin(string password, string username);
     }
 }

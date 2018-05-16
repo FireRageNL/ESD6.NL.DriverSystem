@@ -4,14 +4,15 @@ namespace ESD6NL.DriverSystem.DAL
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
-        private DriverSystemContext _context;
-        private DbSet<T> _dbSet;
+        public DriverSystemContext _context;
+        public DbSet<T> _dbSet;
 
         public GenericRepository(DriverSystemContext context)
         {
             _context = context;
             _dbSet = context.Set<T>();
         }
+
         public T Add(T Object)
         {
             _dbSet.Add(Object);

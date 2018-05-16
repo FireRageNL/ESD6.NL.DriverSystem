@@ -13,9 +13,9 @@ namespace ESD6NL.DriverSystem.Controllers
     public class RegistrationController : Controller
     {
        
-        private IRegistrationService _regSerivce;
+        private IUserService _regSerivce;
 
-        public RegistrationController(IRegistrationService regSerivce)
+        public RegistrationController(IUserService regSerivce)
         {
             _regSerivce = regSerivce;
         }
@@ -38,7 +38,7 @@ namespace ESD6NL.DriverSystem.Controllers
         [HttpPost]
         public IActionResult Index(RegistrationModel model)
         {
-            Entities.User toAdd = new User {email = model.Email, userName = model.Username, password = model.Password};
+            User toAdd = new User {email = model.Email, userName = model.Username, password = model.Password};
             _regSerivce.createUser(toAdd);
             return Redirect("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
         }

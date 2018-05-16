@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ESD6NL.DriverSystem.BLL;
 using ESD6NL.DriverSystem.DAL;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -28,7 +29,11 @@ namespace ESD6NL.DriverSystem
 
             services.AddDbContext<DriverSystemContext>(options => options.UseMySql("server=35.195.239.181;Database=driversystem;UID=root;Password=root"));
 
-            services.AddTransient<IRegistrationService,RegistrationService>();
+            services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IUserRepository, UserRepository>();
+
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie();
 
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
         }
@@ -47,6 +52,8 @@ namespace ESD6NL.DriverSystem
             }
 
             app.UseStaticFiles();
+
+            app.UseAuthentication();
 
             app.UseMvc(routes =>
             {
