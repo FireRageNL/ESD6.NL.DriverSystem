@@ -7,5 +7,10 @@ pipeline{
 				sh 'dotnet msbuild'
             }
         }
+		stage('Test project'){
+			steps{
+				sh 'dotnet test'
+			}
+		}
     }
 }
