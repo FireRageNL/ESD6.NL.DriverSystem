@@ -56,6 +56,12 @@ namespace ESD6NL.DriverSystem.Controllers
             return View(login);
         }
 
+        public IActionResult Logout()
+        {
+            HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("Index", "Home");
+        }
+
         [Authorize]
         public IActionResult Home()
         {

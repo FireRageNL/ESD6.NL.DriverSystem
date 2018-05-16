@@ -33,7 +33,11 @@ namespace ESD6NL.DriverSystem
             services.AddTransient<IUserRepository, UserRepository>();
 
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-                .AddCookie();
+                .AddCookie(options =>
+                {
+                    options.LoginPath = "/Home/Index";
+                    options.LogoutPath = "/Home/Logout";
+                });
 
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
         }
