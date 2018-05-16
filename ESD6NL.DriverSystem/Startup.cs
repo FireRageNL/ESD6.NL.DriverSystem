@@ -38,6 +38,8 @@ namespace ESD6NL.DriverSystem
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IInvoiceService, InvoiceService>();
             services.AddTransient<IInvoiceRepository, InvoiceRepository>();
+            services.AddTransient<ICarService, CarService>();
+            services.AddTransient<ICarRepository, CarRepository>();
 
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options =>

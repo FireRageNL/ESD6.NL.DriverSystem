@@ -3,6 +3,7 @@ using ESD6NL.DriverSystem.Entities;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace ESD6NL.DriverSystem.DAL.Implementations
 {
@@ -15,7 +16,7 @@ namespace ESD6NL.DriverSystem.DAL.Implementations
 
         public Invoice GetSpecificInvoice(int invoiceId)
         {
-            return null;
+            return (from x in _context.Invoices where x.invoiceID == invoiceId select x).SingleOrDefault();
         }
     }
 }

@@ -5,8 +5,8 @@ using System.Text;
 
 namespace ESD6NL.DriverSystem.BLL.Interfaces
 {
-    public interface IInvoiceService
+    public interface ICarService
     {
-        Invoice GetInvoice(int id);
+        Car GetCar(int id);
     }
 }

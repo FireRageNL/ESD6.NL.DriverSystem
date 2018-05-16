@@ -1,24 +1,24 @@
 ﻿using ESD6NL.DriverSystem.BLL.Interfaces;
-using ESD6NL.DriverSystem.Entities;
 using ESD6NL.DriverSystem.DAL.Interfaces;
+using ESD6NL.DriverSystem.Entities;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace ESD6NL.DriverSystem.BLL.Implementations
 {
-    public class InvoiceService : IInvoiceService
+    public class CarService : ICarService
     {
-        private IInvoiceRepository _repo;
+        private ICarRepository _repo;
 
-        public InvoiceService(IInvoiceRepository repo)
+        public CarService(ICarRepository repo)
         {
             _repo = repo;
         }
 
-        public Invoice GetInvoice(int id)
+        public Car GetCar(int id)
         {
-            return _repo.GetSpecificInvoice(id);
+            return _repo.GetSpecificCar(id);
         }
     }
 }
