@@ -24,6 +24,10 @@ namespace ESD6NL.DriverSystem.Controllers
 
         public IActionResult Index()
         {
+            if (User.IsInRole("User"))
+            {
+                return RedirectToAction("Home", "Home");
+            }
             return View();
         }
 
