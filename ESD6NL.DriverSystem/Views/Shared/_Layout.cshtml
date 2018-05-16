@@ -8,11 +8,14 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] Rekeningrijden</title>
+    
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
 
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
         <link rel="stylesheet" href="~/css/site.css" />
         <link rel="stylesheet/less" type="text/css" href="~/css/Home.css" />
+        <link rel="stylesheet/less" type="text/css" href="~/css/Header.css" />
         <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/2.7.2/less.min.js"></script>
     </environment>
     <environment exclude="Development">
@@ -25,28 +28,28 @@
 </head>
 <body>
     <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">Rekeningrijden</a>
-            </div>
-            @if (AuthorizationService.AuthorizeAsync(User, "LoggedInOnly").Result.Succeeded)
-            {
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li><a asp-area="" asp-controller="Home" asp-action="Home">MijnRR</a></li>
-                        <li><a asp-area="" asp-controller="Car" asp-action="CarOverview">Auto's</a></li>
-                        <li><a asp-area="" asp-controller="Invoice" asp-action="InvoiceOverview">Facturen</a></li>
-                        <li><a asp-area="" asp-controller="Home" asp-action="Logout">Uitloggen</a></li>
-                    </ul>
+            <div class="column-container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a asp-area="" asp-controller="Home" asp-action="Index" class="header-brand">Rekeningrijden</a>
                 </div>
-            }
-        </div>
+                @if (AuthorizationService.AuthorizeAsync(User, "LoggedInOnly").Result.Succeeded)
+                {
+                    <div class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav">
+                            <li><a asp-area="" asp-controller="Home" asp-action="Home">MijnRR</a></li>
+                            <li><a asp-area="" asp-controller="Car" asp-action="CarOverview">Auto's</a></li>
+                            <li><a asp-area="" asp-controller="Invoice" asp-action="InvoiceOverview">Facturen</a></li>
+                            <li><a asp-area="" asp-controller="Home" asp-action="Logout">Uitloggen</a></li>
+                        </ul>
+                    </div>
+                }
+            </div>
     </nav>
     <div class="container body-content">
         @RenderBody()
