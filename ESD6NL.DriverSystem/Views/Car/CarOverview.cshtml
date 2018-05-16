@@ -1,7 +1,36 @@
-﻿
+﻿@model ESD6NL.DriverSystem.Models.UserViewModel
+
 @{
     ViewData["Title"] = "CarOverview";
 }
 
 <h2>CarOverview</h2>
 
+<table class="table  table table-striped table-bordered table-responsive table-condensed">
+    <thead>
+        <tr>
+            <th>Nummerplaat</th>
+            <th>Merk</th>
+            <th>Soort</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @{
+                foreach (var car in Model.cars)
+                {
+                    <text>
+
+                <tr><a asp-action="Details" asp-route="@car.CarID">
+                    <td>@car.rdwData.kenteken</td>
+                    <td>@car.rdwData.merk</td>
+                    <td>@car.rdwData.voertuigsoort</td>
+                </a></tr>
+
+                    </text>
+
+                }
+            }
+
+    </tbody>
+</table>
