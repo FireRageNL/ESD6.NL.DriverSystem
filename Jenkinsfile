@@ -1,8 +1,5 @@
 pipeline{
     agent any
-	tools{
-	hudson.plugins.sonar.MsBuildSQRunnerInstallation 'scanner'
-	}
     stages{
         stage('Build project'){
             steps {
@@ -17,9 +14,13 @@ pipeline{
 		}
 		stage('Execute SonarQube Scanner'){
 			steps{
-				sh "dotnet scanner begin /k:'Project-test' /d:sonar.host.url=http://192.168.25.121:9000 /d:sonar.login=33d2bf0931e4ba870789a1cf8e6276a20de55fe1'"
+			    def sqScannerMsBuildHome = tool 'scanner'
+				withSonarQubeEnv('sonarqube') {
+
+				sh "${sqScannerMsBuildHome} begin /k:'Project-test' /d:sonar.host.url=http://192.168.25.121:9000 /d:sonar.login=33d2bf0931e4ba870789a1cf8e6276a20de55fe1'"
 				sh "dotnet build"
-				sh "dotnet scanner end"
+				sh "${sqScannerMsBuildHome} end"
+			}
 			}
 		}
     }
