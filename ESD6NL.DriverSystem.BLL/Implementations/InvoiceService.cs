@@ -11,11 +11,20 @@ namespace ESD6NL.DriverSystem.BLL.Implementations
     {
         private IInvoiceRepository _repo;
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="repo"></param>
         public InvoiceService(IInvoiceRepository repo)
         {
             _repo = repo;
         }
 
+        /// <summary>
+        /// Gets all the information of one specific invoice with the id of that invoice.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public Invoice GetInvoice(int id)
         {
             return _repo.GetSpecificInvoice(id);

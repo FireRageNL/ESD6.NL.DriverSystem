@@ -9,11 +9,20 @@ namespace ESD6NL.DriverSystem.DAL.Implementations
 {
     public class InvoiceRepository : GenericRepository<Invoice>, IInvoiceRepository
     {
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="context"></param>
         public InvoiceRepository(DriverSystemContext context) : base(context)
         {
 
         }
 
+        /// <summary>
+        /// Gets specific invoice by the id of that invoice from the database.
+        /// </summary>
+        /// <param name="invoiceId"></param>
+        /// <returns></returns>
         public Invoice GetSpecificInvoice(int invoiceId)
         {
             return (from x in _context.Invoices where x.invoiceID == invoiceId select x).SingleOrDefault();

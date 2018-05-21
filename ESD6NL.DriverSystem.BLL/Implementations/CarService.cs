@@ -11,11 +11,20 @@ namespace ESD6NL.DriverSystem.BLL.Implementations
     {
         private ICarRepository _repo;
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="repo"></param>
         public CarService(ICarRepository repo)
         {
             _repo = repo;
         }
 
+        /// <summary>
+        /// Gets all the information of one specific car with the id of that car. 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public Car GetCar(int id)
         {
             return _repo.GetSpecificCar(id);

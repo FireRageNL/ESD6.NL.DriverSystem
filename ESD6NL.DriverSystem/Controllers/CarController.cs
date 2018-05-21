@@ -13,16 +13,29 @@ namespace ESD6NL.DriverSystem.Controllers
     {
         private readonly ICarService _carService;
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="carService"></param>
         public CarController(ICarService carService)
         {
             _carService = carService;
         }
 
+        /// <summary>
+        /// Overview action result. Shows all the cars of an owner.
+        /// </summary>
+        /// <returns></returns>
         public IActionResult CarOverview()
         {
             return View();
         }
 
+        /// <summary>
+        /// Detail action result. Shows all the details of one specific car.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public IActionResult Details(int id)
         {
             var car = _carService.GetCar(id);

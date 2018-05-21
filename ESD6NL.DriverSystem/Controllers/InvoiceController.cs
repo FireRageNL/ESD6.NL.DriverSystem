@@ -13,6 +13,10 @@ namespace ESD6NL.DriverSystem.Controllers
     {
         private readonly IInvoiceService _invoiceService;
 
+        /// <summary>
+        /// Contructor
+        /// </summary>
+        /// <param name="invoiceService"></param>
         public InvoiceController(IInvoiceService invoiceService)
         {
             _invoiceService = invoiceService;
