@@ -4,12 +4,12 @@ using ESD6NL.DriverSystem.Entities;
 using ESD6NL.DriverSystem.Helpers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-
+using System;
 
 namespace ESD6.NL.DriverSystem.UnitTests
 {
     [TestClass]
-    class InvoiceServiceTests
+    public class InvoiceServiceTests
     {
         private InvoiceService _invoiceService;
 
@@ -42,9 +42,10 @@ namespace ESD6.NL.DriverSystem.UnitTests
         }
 
         [TestMethod]
+        [ExpectedException(typeof(NullReferenceException), "An id is used that does not yet excist.")]
         public void getSoecificInvoice_FakeInvoice_ErrorMessage()
         {
-            Assert.AreNotEqual(2, _invoiceService.GetInvoice(2).invoiceNumber);
+            var testvalue = _invoiceService.GetInvoice(2).invoiceNumber;
         }
     }
 }

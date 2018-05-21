@@ -3,11 +3,12 @@ using ESD6NL.DriverSystem.DAL.Interfaces;
 using ESD6NL.DriverSystem.Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using System;
 
 namespace ESD6.NL.DriverSystem.UnitTests
 {
     [TestClass]
-    class CarServiceTests
+    public class CarServiceTests
     {
         private CarService _carService;
 
@@ -32,9 +33,11 @@ namespace ESD6.NL.DriverSystem.UnitTests
         }
 
         [TestMethod]
+        [ExpectedException(typeof(NullReferenceException), 
+            "An id is used that does not yet excist.")]
         public void getSpecificCar_FakeCar_ErrorMessage()
         {
-            Assert.AreNotEqual(2, _carService.GetCar(2).carTrackerID);
+            var testvalue = _carService.GetCar(2).carTrackerID;
         }
     }
 }
