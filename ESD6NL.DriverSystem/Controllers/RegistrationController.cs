@@ -38,9 +38,9 @@ namespace ESD6NL.DriverSystem.Controllers
         [HttpPost]
         public IActionResult Index(RegistrationModel model)
         {
-            User toAdd = new User {email = model.Email, userName = model.Username, password = model.Password};
+            User toAdd = new User {email = model.Email, userName = model.Username, password = model.Password, firstName = model.FirstName, lastName = model.LastName, citizenServiceNumber = model.CitizenServiceNumber};
             _regSerivce.createUser(toAdd);
-            return Redirect("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
+            return RedirectToAction("Index", "Home");
         }
     }
 }
