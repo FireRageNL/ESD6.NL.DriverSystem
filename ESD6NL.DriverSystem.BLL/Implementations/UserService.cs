@@ -2,6 +2,7 @@
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using ESD6NL.DriverSystem.BLL.Helpers;
 using ESD6NL.DriverSystem.BLL.RestModels;
 using ESD6NL.DriverSystem.DAL;
 using ESD6NL.DriverSystem.Entities;
@@ -28,11 +29,8 @@ namespace ESD6NL.DriverSystem.BLL
             string pwHash = HashingHelper.generatePasswordHash(toSave.password, salt);
             string pwSave = salt + ":" + pwHash;
             toSave.password = pwSave;
-            RegistrationModel model = new RegistrationModel{LastName = toSave.lastName, CitizenServiceNumber = toSave.citizenServiceNumber, FirstName = toSave.firstName};
-            var jsonModel = JsonConvert.SerializeObject(model);
-            var httpContent = new StringContent(jsonModel);
-            httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-            HttpResponseMessage response = await _client.PutAsync($"owner", httpContent);
+            RegistrationModel model = new RegistrationModel{LastName = toSave.lastName, CitizenServiceNumber = toSave.citizenServiceNumber, FirstName = toSave.firstName};   
+            HttpResponseMessage response = await _client.PutAsync($"owner", RestHelper.convertToSendableHttpObject(model));
             response.EnsureSuccessStatusCode();
            return _repo.Add(toSave);
         }
