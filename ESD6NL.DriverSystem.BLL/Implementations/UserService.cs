@@ -14,25 +14,26 @@ namespace ESD6NL.DriverSystem.BLL
     public class UserService : IUserService
     {
         private IUserRepository _repo;
-        private HttpClient _client = new HttpClient();
         
 
         public UserService(IUserRepository repo)
         {
             _repo = repo;
-            _client.BaseAddress = new Uri("http://localhost:8080/AccountAdministrationSystem/api/");
         }
 
         public async Task<User> createUser(User toSave)
         {
-            string salt = HashingHelper.getSalt();
-            string pwHash = HashingHelper.generatePasswordHash(toSave.password, salt);
-            string pwSave = salt + ":" + pwHash;
-            toSave.password = pwSave;
+            toSave.password = generatePassword(toSave.password);
             RegistrationModel model = new RegistrationModel{LastName = toSave.lastName, CitizenServiceNumber = toSave.citizenServiceNumber, FirstName = toSave.firstName};   
-            HttpResponseMessage response = await _client.PutAsync($"owner", RestHelper.convertToSendableHttpObject(model));
+            HttpResponseMessage response = await RestHelper.AasHttpClient().PutAsync($"owner", RestHelper.ConvertToSendableHttpObject(model));
             response.EnsureSuccessStatusCode();
-           return _repo.Add(toSave);
+            return _repo.Add(toSave);
+        }
+
+        private string generatePassword(string password)
+        {
+            string salt = HashingHelper.getSalt();
+            return salt + ":"+ HashingHelper.generatePasswordHash(password, salt);
         }
 
         public bool checkUserLogin(string password, string username)
