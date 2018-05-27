@@ -18,7 +18,7 @@ namespace ESD6.NL.DriverSystem.UnitTests
             mock.Setup(garage => garage.GetSpecificCar(1)).Returns(new Car()
             {
                 CarID = 1,
-                carTrackerID = 1,
+                carTrackerID = "1",
                 rdwData = new RDW(),
                 rdwFuelData = new RDWFuel()
             });
