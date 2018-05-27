@@ -5,7 +5,7 @@ namespace ESD6NL.DriverSystem.BLL
 {
     public interface IUserService
     {
-        Task<User> createUser(User toSave);
+        User createUser(User toSave);
 
         bool checkUserLogin(string password, string username);
     }

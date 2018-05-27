@@ -21,12 +21,17 @@ namespace ESD6NL.DriverSystem.BLL
             _repo = repo;
         }
 
-        public async Task<User> createUser(User toSave)
+        public User createUser(User toSave)
         {
             toSave.password = generatePassword(toSave.password);
-            RegistrationModel model = new RegistrationModel{LastName = toSave.lastName, CitizenServiceNumber = toSave.citizenServiceNumber, FirstName = toSave.firstName};   
-            HttpResponseMessage response = await RestHelper.AasHttpClient().PutAsync($"owner", RestHelper.ConvertToSendableHttpObject(model));
+            RegistrationModel model = new RegistrationModel{LastName = toSave.lastName, CitizenServiceNumber = toSave.citizenServiceNumber, FirstName = toSave.firstName};
+            HttpResponseMessage response = RestHelper.AasHttpClient()
+                .PostAsync($"owners", RestHelper.ConvertToSendableHttpObject(model)).Result;
             response.EnsureSuccessStatusCode();
+            string msg = response.Content.ReadAsStringAsync().Result;
+            RestUserModel mod = JsonConvert.DeserializeObject<RestUserModel>(msg);
+            string a = "a";
+
             return _repo.Add(toSave);
         }
 
