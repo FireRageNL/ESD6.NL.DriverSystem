@@ -29,7 +29,7 @@ namespace ESD6.NL.DriverSystem.UnitTests
         [TestMethod]
         public void getSpecificCar_ExcistingCar_CarDetails()
         {
-            Assert.AreEqual(1, _carService.GetCar(1).carTrackerID);
+            Assert.AreEqual("1", _carService.GetCar(1).carTrackerID);
         }
 
         [TestMethod]

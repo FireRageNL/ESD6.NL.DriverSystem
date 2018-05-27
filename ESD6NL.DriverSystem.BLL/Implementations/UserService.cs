@@ -1,24 +1,31 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using ESD6NL.DriverSystem.BLL.Helpers;
+using ESD6NL.DriverSystem.BLL.Implementations;
+using ESD6NL.DriverSystem.BLL.Interfaces;
 using ESD6NL.DriverSystem.BLL.RestModels;
 using ESD6NL.DriverSystem.DAL;
 using ESD6NL.DriverSystem.Entities;
 using ESD6NL.DriverSystem.Helpers;
 using Newtonsoft.Json;
+using Car = ESD6NL.DriverSystem.Entities.Car;
 
 namespace ESD6NL.DriverSystem.BLL
 {
     public class UserService : IUserService
     {
         private IUserRepository _repo;
+
+        private ICarService _carService;
         
 
-        public UserService(IUserRepository repo)
+        public UserService(IUserRepository repo, ICarService carServce)
         {
             _repo = repo;
+            _carService = carServce;
         }
 
         public User createUser(User toSave)
@@ -30,8 +37,9 @@ namespace ESD6NL.DriverSystem.BLL
             response.EnsureSuccessStatusCode();
             string msg = response.Content.ReadAsStringAsync().Result;
             RestUserModel mod = JsonConvert.DeserializeObject<RestUserModel>(msg);
-            string a = "a";
-
+            toSave.address = mod.Address;
+            toSave.birthDay = DateTime.ParseExact(mod.Birthday,"dd-MM-yyyy",System.Globalization.CultureInfo.InvariantCulture);
+            toSave.cars = _carService.GetCarsOfUserFromAAS(1) as List<Car>;
             return _repo.Add(toSave);
         }
 

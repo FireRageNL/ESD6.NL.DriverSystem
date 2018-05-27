@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ESD6NL.DriverSystem.Entities;
 using Newtonsoft.Json;
 
 namespace ESD6NL.DriverSystem.BLL.RestModels
@@ -17,20 +18,6 @@ namespace ESD6NL.DriverSystem.BLL.RestModels
 
         [JsonProperty("Ownerships")]
         public List<Car> Car { get; set; }
-    }
-
-    class Address
-    {
-        public string Street { get; set; }
-
-        public int StreetNr { get; set; }
-
-        public string PostalCode { get; set; }
-
-        public string City { get; set; }
-
-        public string Country { get; set; }
-
     }
 
     class Car
