@@ -11,7 +11,11 @@ namespace ESD6NL.DriverSystem.DAL
         public DriverSystemContext(DbContextOptions<DriverSystemContext> options) : base (options)
         {
         }
-        
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<User>().HasIndex(u => new {u.email, u.userName}).IsUnique();
+        }
 
         public DbSet<Translation> Translations { get; set; }
         public DbSet<Address> Addresses { get; set; }

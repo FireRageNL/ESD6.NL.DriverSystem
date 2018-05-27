@@ -24,7 +24,7 @@ namespace ESD6.NL.DriverSystem.UnitTests
                 email = "test@email.com"
             });
             mock.Setup(reee => reee.Add(It.IsAny<User>())).Returns((User u) => u);
-            _userService = new UserService(mock.Object);
+            _userService = new UserService(mock.Object,null);
         }
 
         [TestMethod]
