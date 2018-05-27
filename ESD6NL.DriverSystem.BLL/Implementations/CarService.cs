@@ -58,10 +58,7 @@ namespace ESD6NL.DriverSystem.BLL.Implementations
         {
             string url = "?kenteken=" + licensePlate.Replace("-", "");
             HttpResponseMessage response = RestHelper.RdwHttpClient().GetAsync(url).Result;
-            var rdwData = response.Content.ReadAsStringAsync().Result;
-            var rdwDataNew = rdwData.Replace("[", "");
-            var rdwDataNewest = rdwDataNew.Replace("]", "");
-            var rdwDataJson = JsonConvert.DeserializeObject<RDW>(rdwDataNewest);
+            var rdwDataJson = JsonConvert.DeserializeObject<RDW>(RestHelper.ConvertRdwData(response));
             return rdwDataJson;
         }
 
@@ -69,10 +66,7 @@ namespace ESD6NL.DriverSystem.BLL.Implementations
         {
             string url = "?kenteken=" + licensePlate.Replace("-", "");
             HttpResponseMessage response = RestHelper.RdwFuelHttpClient().GetAsync(url).Result;
-            var rdwData = response.Content.ReadAsStringAsync().Result;
-            var rdwDataNew = rdwData.Replace("[", "");
-            var rdwDataNewest = rdwDataNew.Replace("]", "");
-            var rdwDataJson = JsonConvert.DeserializeObject<RDWFuel>(rdwDataNewest);
+            var rdwDataJson = JsonConvert.DeserializeObject<RDWFuel>(RestHelper.ConvertRdwData(response));
             return rdwDataJson;
         }
     }

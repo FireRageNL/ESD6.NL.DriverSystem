@@ -44,6 +44,13 @@ namespace ESD6NL.DriverSystem.BLL.Helpers
                 BaseAddress = new Uri("http://opendata.rdw.nl/resource/8ys7-d773.json")
             });
         }
+
+        public static string ConvertRdwData(HttpResponseMessage rdwData)
+        {
+            var result = rdwData.Content.ReadAsStringAsync().Result;
+            var resreplace = result.Replace("[", "");
+            return resreplace.Replace("]", "");
+        }
     }
 }
 
