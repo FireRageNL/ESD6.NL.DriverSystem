@@ -18,23 +18,21 @@
     </thead>
 
     <tbody>
-        @*@{
+        @{
             foreach (var invoice in Model.invoices)
             {
                 <text>
-
-            <tr><a asp-action="Details" asp-route="@invoice.invoiceID">
-                <td>@invoice.invoiceNumber</td>
-                <td>@invoice.period</td>
-                <td>@invoice.totalKm</td>
-                <td>@invoice.totalAmount</td>
-                <td>@invoice.paymentStatus</td>
-            </a></tr>
-
+                    <tr>
+                        <td><a asp-action="Details" asp-controller="Invoice" asp-route-id="@invoice.invoiceID">@invoice.invoiceNumber</a></td>
+                        <td>@invoice.period</td>
+                        <td>@invoice.totalKm</td>
+                        <td>@invoice.totalAmount</td>
+                        <td>@invoice.paymentStatus</td>
+                    </tr>
                 </text>
 
             }
-        }*@
+        }
 
     </tbody>
 </table>

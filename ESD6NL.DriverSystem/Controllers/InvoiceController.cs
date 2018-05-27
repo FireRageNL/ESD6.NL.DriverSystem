@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ESD6NL.DriverSystem.BLL.Interfaces;
+using ESD6NL.DriverSystem.Entities;
+using ESD6NL.DriverSystem.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -28,7 +30,10 @@ namespace ESD6NL.DriverSystem.Controllers
         /// <returns>invoice overview view</returns>
         public IActionResult InvoiceOverview()
         {
-            return View();
+            var invoice = _invoiceService.GetAllInvoices(88888888888) as List<Invoice>;
+            var userViewModel = FillUserViewModel(invoice);
+
+            return View(userViewModel);
         }
 
         /// <summary>
@@ -39,8 +44,27 @@ namespace ESD6NL.DriverSystem.Controllers
         {
             var invoice = _invoiceService.GetInvoice(id);
             if (invoice == null) return NotFound();
+            var invoiceViewModel = FillInvoiceViewModel(invoice);
 
-            return View(invoice);
+            return View(invoiceViewModel);
+        }
+
+        public UserViewModel FillUserViewModel(IEnumerable<Invoice> invoices)
+        {
+            UserViewModel userViewModel = new UserViewModel();
+            userViewModel.invoices.AddRange(invoices);
+            return userViewModel;
+        }
+
+        public InvoiceViewModel FillInvoiceViewModel(Invoice invoice)
+        {
+            InvoiceViewModel invoiceViewModel = new InvoiceViewModel();
+            invoiceViewModel.invoiceId = invoice.invoiceID;
+            invoiceViewModel.date = invoice.period;
+            invoiceViewModel.totalKm = invoice.totalKm;
+            invoiceViewModel.totalEuros = invoice.totalAmount;
+            invoiceViewModel.rows = invoice.rows;
+            return invoiceViewModel;
         }
     }
 }

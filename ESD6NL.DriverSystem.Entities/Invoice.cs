@@ -13,5 +13,7 @@ namespace ESD6NL.DriverSystem.Entities
         public Decimal totalKm { get; set; }
         public Decimal totalAmount { get; set; }
         public string filePath { get; set; }
+
+        public List<Row> rows { get; set; }
     }
 }

@@ -19,6 +19,11 @@ namespace ESD6NL.DriverSystem.DAL.Implementations
 
         }
 
+        /// <summary>
+        /// Get all cars from database.
+        /// </summary>
+        /// <param name="citizenServiceNumber"></param>
+        /// <returns></returns>
         public IEnumerable<Car> GetAllCars(int citizenServiceNumber)
         {
             return _context.Cars.Include(x => x.rdwData)

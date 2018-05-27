@@ -4,6 +4,9 @@ using ESD6NL.DriverSystem.DAL.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Net.Http;
+using ESD6NL.DriverSystem.BLL.Helpers;
+using Newtonsoft.Json;
 
 namespace ESD6NL.DriverSystem.BLL.Implementations
 {
@@ -18,6 +21,18 @@ namespace ESD6NL.DriverSystem.BLL.Implementations
         public InvoiceService(IInvoiceRepository repo)
         {
             _repo = repo;
+        }
+
+        public List<Invoice> GetAllInvoices(long citizenServiceNumber)
+        {
+            HttpResponseMessage response = RestHelper.AasHttpClient().GetAsync($"invoices/" + citizenServiceNumber).Result;
+            response.EnsureSuccessStatusCode();
+            var foundInvoices = response.Content.ReadAsStringAsync().Result;
+            var foundInvoicesJson = JsonConvert.DeserializeObject<List<Invoice>>(foundInvoices);
+
+            foreach(Invoice i in foundInvoicesJson)
+            _repo.Add(i);
+            return foundInvoicesJson;
         }
 
         /// <summary>

@@ -13,7 +13,7 @@ namespace ESD6NL.DriverSystem.Models
         public string lastName { get; set; }
         public DateTime birthDay { get; set; }
         public Address address { get; set; }
-        public List<Car> cars { get; set; } = new List<Car>(); 
-        public IEnumerable<Invoice> invoices { get; set; }
+        public List<Car> cars { get; set; } = new List<Car>();
+        public List<Invoice> invoices { get; set; } = new List<Invoice>();
     }
 }
