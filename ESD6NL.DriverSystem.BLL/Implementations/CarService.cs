@@ -1,15 +1,18 @@
-﻿using ESD6NL.DriverSystem.BLL.Interfaces;
+﻿using ESD6NL.DriverSystem.BLL.Helpers;
+using ESD6NL.DriverSystem.BLL.Interfaces;
 using ESD6NL.DriverSystem.DAL.Interfaces;
 using ESD6NL.DriverSystem.Entities;
-using System;
+using Newtonsoft.Json;
 using System.Collections.Generic;
-using System.Text;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace ESD6NL.DriverSystem.BLL.Implementations
 {
     public class CarService : ICarService
     {
         private ICarRepository _repo;
+        private Car foundCar;
 
         /// <summary>
         /// Constructor
@@ -28,6 +31,15 @@ namespace ESD6NL.DriverSystem.BLL.Implementations
         public Car GetCar(int id)
         {
             return _repo.GetSpecificCar(id);
+        }
+
+        public IEnumerable<Car> GetCarsOfUserFromAAS(int userId)
+        {
+            HttpResponseMessage response = RestHelper.AasHttpClient().GetAsync($"cars").Result;
+            response.EnsureSuccessStatusCode();
+            var foundCars = response.Content.ReadAsStringAsync().Result;
+            var foundCarsJson = JsonConvert.DeserializeObject<List<Car>>(foundCars); 
+            return foundCarsJson;
         }
     }
 }

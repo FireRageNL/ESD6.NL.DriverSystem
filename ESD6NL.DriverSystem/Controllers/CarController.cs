@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ESD6NL.DriverSystem.BLL.Interfaces;
+using ESD6NL.DriverSystem.Entities;
+using ESD6NL.DriverSystem.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Server.Kestrel.Internal.System.Collections.Sequences;
 
 namespace ESD6NL.DriverSystem.Controllers
 {
@@ -28,7 +31,10 @@ namespace ESD6NL.DriverSystem.Controllers
         /// <returns></returns>
         public IActionResult CarOverview()
         {
-            return View();
+            var car = _carService.GetCarsOfUserFromAAS(1);
+            var userViewModel = FillUserViewModel(car);
+
+            return View(userViewModel);
         }
 
         /// <summary>
@@ -42,6 +48,13 @@ namespace ESD6NL.DriverSystem.Controllers
             if (car == null) return NotFound();
 
             return View(car);
+        }
+
+        public UserViewModel FillUserViewModel(IEnumerable<Car> car)
+        {
+            UserViewModel userViewModel = new UserViewModel();
+            userViewModel.cars.AddRange(car);
+            return userViewModel;
         }
     }
 }
