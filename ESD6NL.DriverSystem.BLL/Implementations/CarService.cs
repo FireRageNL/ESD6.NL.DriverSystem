@@ -23,6 +23,11 @@ namespace ESD6NL.DriverSystem.BLL.Implementations
             _repo = repo;
         }
 
+        public IEnumerable<Car> GetAllCars(int citizenServiceNumber)
+        {
+            return _repo.GetAllCars(citizenServiceNumber);
+        }
+
         /// <summary>
         /// Gets all the information of one specific car with the id of that car. 
         /// </summary>
@@ -39,7 +44,36 @@ namespace ESD6NL.DriverSystem.BLL.Implementations
             response.EnsureSuccessStatusCode();
             var foundCars = response.Content.ReadAsStringAsync().Result;
             var foundCarsJson = JsonConvert.DeserializeObject<List<Car>>(foundCars); 
-            return foundCarsJson;
+
+            IEnumerable<Car> cars = foundCarsJson as IEnumerable<Car>;
+            foreach(Car c in cars)
+            {
+                c.rdwData = findRdwByLicensePlate(c.licensePlate);
+                c.rdwFuelData = findRdwFuelByLicensePlate(c.licensePlate);
+            }
+            return cars;
+        }
+
+        public RDW findRdwByLicensePlate(string licensePlate)
+        {
+            string url = "?kenteken=" + licensePlate.Replace("-", "");
+            HttpResponseMessage response = RestHelper.RdwHttpClient().GetAsync(url).Result;
+            var rdwData = response.Content.ReadAsStringAsync().Result;
+            var rdwDataNew = rdwData.Replace("[", "");
+            var rdwDataNewest = rdwDataNew.Replace("]", "");
+            var rdwDataJson = JsonConvert.DeserializeObject<RDW>(rdwDataNewest);
+            return rdwDataJson;
+        }
+
+        public RDWFuel findRdwFuelByLicensePlate(string licensePlate)
+        {
+            string url = "?kenteken=" + licensePlate.Replace("-", "");
+            HttpResponseMessage response = RestHelper.RdwFuelHttpClient().GetAsync(url).Result;
+            var rdwData = response.Content.ReadAsStringAsync().Result;
+            var rdwDataNew = rdwData.Replace("[", "");
+            var rdwDataNewest = rdwDataNew.Replace("]", "");
+            var rdwDataJson = JsonConvert.DeserializeObject<RDWFuel>(rdwDataNewest);
+            return rdwDataJson;
         }
     }
 }

@@ -31,7 +31,7 @@ namespace ESD6NL.DriverSystem.Controllers
         /// <returns></returns>
         public IActionResult CarOverview()
         {
-            var car = _carService.GetCarsOfUserFromAAS(1);
+            var car = _carService.GetAllCars(1);
             var userViewModel = FillUserViewModel(car);
 
             return View(userViewModel);
@@ -46,8 +46,9 @@ namespace ESD6NL.DriverSystem.Controllers
         {
             var car = _carService.GetCar(id);
             if (car == null) return NotFound();
+            var carViewModel = FillCarViewModel(car);
 
-            return View(car);
+            return View(carViewModel);
         }
 
         public UserViewModel FillUserViewModel(IEnumerable<Car> car)
@@ -55,6 +56,13 @@ namespace ESD6NL.DriverSystem.Controllers
             UserViewModel userViewModel = new UserViewModel();
             userViewModel.cars.AddRange(car);
             return userViewModel;
+        }
+
+        public CarViewModel FillCarViewModel(Car car)
+        {
+            CarViewModel carViewModel = new CarViewModel();
+            carViewModel.car = car;
+            return carViewModel;
         }
     }
 }

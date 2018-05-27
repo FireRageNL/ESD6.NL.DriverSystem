@@ -16,21 +16,21 @@
     </thead>
 
     <tbody>
-        @*@{
-                foreach (var car in Model.cars)
-                {
-                    <text>
+        @{
+            foreach (var car in Model.cars)
+            {
+                <text>
 
-                <tr><a asp-action="Details" asp-route="@car.CarID">
-                    <td>@car.rdwData.kenteken</td>
-                    <td>@car.rdwData.merk</td>
-                    <td>@car.rdwData.voertuigsoort</td>
-                </a></tr>
+                    <tr>
+                        <td><a asp-action="Details" asp-controller="Car" asp-route-id="@car.CarID">@car.licensePlate</a></td>
+                        <td>@car.rdwData.merk</td>
+                        <td>@car.rdwData.voertuigsoort</td>
+                    </tr>
 
-                    </text>
+                </text>
 
-                }
-            }*@
+            }
+        }
 
     </tbody>
 </table>

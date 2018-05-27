@@ -10,6 +10,8 @@ namespace ESD6NL.DriverSystem.BLL.Helpers
     public static class RestHelper
     { 
         private static HttpClient assClient;
+        private static HttpClient rdwClient;
+        private static HttpClient rdwFuelClient;
 
         public static StringContent ConvertToSendableHttpObject(object T)
         {
@@ -26,5 +28,23 @@ namespace ESD6NL.DriverSystem.BLL.Helpers
                 BaseAddress = new Uri("http://localhost:8080/AccountAdministrationSystem/api/")
             });
         }
+
+        public static HttpClient RdwHttpClient()
+        {
+            return rdwClient ?? (rdwClient = new HttpClient
+            {
+                BaseAddress = new Uri("http://opendata.rdw.nl/resource/m9d7-ebf2.json")
+            });
+        }
+
+        public static HttpClient RdwFuelHttpClient()
+        {
+            return rdwFuelClient ?? (rdwFuelClient = new HttpClient
+            {
+                BaseAddress = new Uri("http://opendata.rdw.nl/resource/8ys7-d773.json")
+            });
+        }
     }
 }
+
+

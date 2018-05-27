@@ -8,6 +8,8 @@ namespace ESD6NL.DriverSystem.BLL.Interfaces
 {
     public interface ICarService
     {
+        IEnumerable<Car> GetAllCars(int citizenServiceNumber);
+
         Car GetCar(int id);
 
         IEnumerable<Car> GetCarsOfUserFromAAS(int userId);

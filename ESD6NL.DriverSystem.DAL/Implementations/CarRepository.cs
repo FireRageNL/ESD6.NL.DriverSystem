@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace ESD6NL.DriverSystem.DAL.Implementations
 {
@@ -18,6 +19,20 @@ namespace ESD6NL.DriverSystem.DAL.Implementations
 
         }
 
+        public IEnumerable<Car> GetAllCars(int citizenServiceNumber)
+        {
+            return _context.Cars.Include(x => x.rdwData)
+                .Include(x => x.rdwFuelData)
+                .Select(x => new Car
+                {
+                    CarID = x.CarID,
+                    carTrackerID = x.carTrackerID,
+                    licensePlate = x.licensePlate,
+                    rdwData = x.rdwData,
+                    rdwFuelData = x.rdwFuelData
+                });
+        }
+
         /// <summary>
         /// Gets specific car by the id of that car from the database. 
         /// </summary>
@@ -25,7 +40,17 @@ namespace ESD6NL.DriverSystem.DAL.Implementations
         /// <returns></returns>
         public Car GetSpecificCar(int id)
         {
-            return (from x in _context.Cars where x.CarID == id select x).SingleOrDefault();
+            return _context.Cars.Where(x => x.CarID == id)
+                .Include(x => x.rdwData)
+                .Include(x => x.rdwFuelData)
+                .Select(x => new Car
+                {
+                    CarID = x.CarID,
+                    carTrackerID = x.carTrackerID,
+                    licensePlate = x.licensePlate,
+                    rdwData = x.rdwData,
+                    rdwFuelData = x.rdwFuelData
+                }).SingleOrDefault();
         }
     }
 }
