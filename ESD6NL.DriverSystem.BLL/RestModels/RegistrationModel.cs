@@ -10,6 +10,6 @@ namespace ESD6NL.DriverSystem.BLL.RestModels
 
         public string LastName { get; set; }
 
-        public int CitizenServiceNumber { get; set; }
+        public long CitizenServiceNumber { get; set; }
     }
 }
