@@ -9,7 +9,7 @@ namespace ESD6NL.DriverSystem.BLL.Helpers
 {
     public static class RestHelper
     { 
-        private static HttpClient assClient;
+        private static HttpClient aasClient;
         private static HttpClient rdwClient;
         private static HttpClient rdwFuelClient;
 
@@ -23,7 +23,7 @@ namespace ESD6NL.DriverSystem.BLL.Helpers
 
         public static HttpClient AasHttpClient()
         {
-            return assClient ?? (assClient = new HttpClient
+            return aasClient ?? (aasClient = new HttpClient
             {
                 BaseAddress = new Uri("http://localhost:8080/AccountAdministrationSystem/api/")
             });
