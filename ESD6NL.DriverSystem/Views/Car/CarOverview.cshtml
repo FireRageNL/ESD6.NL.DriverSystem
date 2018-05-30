@@ -1,17 +1,18 @@
-﻿@model ESD6NL.DriverSystem.Models.UserViewModel
+﻿@using ESD6NL.DriverSystem.Helpers
+@model ESD6NL.DriverSystem.Models.UserViewModel
 
 @{
     ViewData["Title"] = "CarOverview";
 }
 
-<h2>CarOverview</h2>
+<h2>@Html.getTerm("Car Overview")</h2>
 
 <table class="table  table table-striped table-bordered table-responsive table-condensed">
     <thead>
         <tr>
-            <th>Nummerplaat</th>
-            <th>Merk</th>
-            <th>Soort</th>
+            <th>@Html.getTerm("Nummerplaat")</th>
+            <th>@Html.getTerm("Merk")</th>
+            <th>@Html.getTerm("Soort")</th>
         </tr>
     </thead>
 

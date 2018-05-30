@@ -1,62 +1,62 @@
-﻿@model ESD6NL.DriverSystem.Models.CarViewModel
+﻿@using ESD6NL.DriverSystem.Helpers
+@model ESD6NL.DriverSystem.Models.CarViewModel
 
 @{
     ViewData["Title"] = "CarDetail";
 }
 
-<h2>Auto met kenteken @Html.DisplayFor(model => model.car.rdwData.kenteken)</h2>
+<h2>@Html.getTerm("Auto met kenteken") @Html.DisplayFor(model => model.car.rdwData.kenteken)</h2>
 
 <table class="table  table table-striped table-bordered table-responsive table-condensed">
     <tbody>
         <tr>
-            <td>Auto merk</td>
+            <td>@Html.getTerm("Auto merk")</td>
             <td>@Html.DisplayFor(model => model.car.rdwData.merk)</td>
         </tr>
 
         <tr>
-            <td>Handelsbenaming</td>
+            <td>@Html.getTerm("Handelsbenaming")</td>
             <td>@Html.DisplayFor(model => model.car.rdwData.handelsbenaming)</td>
         </tr>
 
         <tr>
-            <td>Soort voertuig</td>
+            <td>@Html.getTerm("Soort voertuig")</td>
             <td>@Html.DisplayFor(model => model.car.rdwData.voertuigsoort)</td>
         </tr>
 
         <tr>
-            <td>Zuinigheidslabel</td>
+            <td>@Html.getTerm("Zuinigheidslabel")</td>
             <td>@Html.DisplayFor(model => model.car.rdwData.zuinigheidslabel)</td>
         </tr>
 
         <tr>
-            <td>Brandstof</td>
+            <td>@Html.getTerm("Brandstof")</td>
             <td>@Html.DisplayFor(model => model.car.rdwFuelData.brandstof_omschrijving)</td>
         </tr>
 
         <tr>
-            <td>Auto kleur</td>
+            <td>@Html.getTerm("Auto kleur")</td>
             <td>@Html.DisplayFor(model => model.car.rdwData.eerste_kleur)</td>
         </tr>
 
         <tr>
-            <td>Aantal deuren</td>
+            <td>@Html.getTerm("Aantal deuren")</td>
             <td>@Html.DisplayFor(model => model.car.rdwData.aantal_deuren)</td>
         </tr>
 
         <tr>
-            <td>Aantal zitplaatsen</td>
+            <td>@Html.getTerm("Aantal zitplaatsen")</td>
             <td>@Html.DisplayFor(model => model.car.rdwData.aantal_zitplaatsen)</td>
         </tr>
 
         <tr>
-            <td>Aantal rolstoelplaatsen</td>
+            <td>@Html.getTerm("Aantal rolstoelplaatsen")</td>
             <td>@Html.DisplayFor(model => model.car.rdwData.aantal_rolstoelplaatsen)</td>
         </tr>
 
         <tr>
-            <td>Vervaldatum APK</td>
+            <td>@Html.getTerm("Vervaldatum APK")</td>
             <td>@Html.DisplayFor(model => model.car.rdwData.vervaldatum_apk)</td>
         </tr>
-
     </tbody>
 </table>

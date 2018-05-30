@@ -43,3 +43,7 @@ navbar-brand{
     line-height: 100px;
     font-size: 40px;
 }
+
+.right {
+    float: right;
+}

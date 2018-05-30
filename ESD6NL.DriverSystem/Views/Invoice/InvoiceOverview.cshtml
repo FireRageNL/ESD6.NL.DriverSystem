@@ -1,19 +1,20 @@
-﻿@model ESD6NL.DriverSystem.Models.UserViewModel
+﻿@using ESD6NL.DriverSystem.Helpers
+@model ESD6NL.DriverSystem.Models.UserViewModel
 
 @{
     ViewData["Title"] = "Facturen";
 }
 
-<h2>Facturen</h2>
+<h2>@Html.getTerm("Facturen")</h2>
 
 <table class="table  table table-striped table-bordered table-responsive table-condensed">
     <thead>
         <tr>
-            <th>Factuur</th>
-            <th>Datum</th>
-            <th>Totaal kilometers gereden</th>
-            <th>Totaal bedrag</th>
-            <th>Status</th>
+            <th>@Html.getTerm("Factuur")</th>
+            <th>@Html.getTerm("Datum")</th>
+            <th>@Html.getTerm("Totaal kilometers gereden")</th>
+            <th>@Html.getTerm("Totaal bedrag")</th>
+            <th>@Html.getTerm("Status")</th>
         </tr>
     </thead>
 

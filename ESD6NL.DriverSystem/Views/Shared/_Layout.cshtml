@@ -1,4 +1,5 @@
 ﻿@using System.Security.Claims
+@using ESD6NL.DriverSystem.Helpers
 @using Microsoft.AspNetCore.Authorization
 @inject IAuthorizationService AuthorizationService
 
@@ -39,19 +40,25 @@
                     <a asp-area="" asp-controller="Home" asp-action="Index" class="header-brand">Rekeningrijden</a>
                 </div>
 
-                    <div class="navbar-collapse collapse">
+                <div class="navbar-collapse collapse">
+                    <div class="LoggedInNavbar">
                         <ul class="nav navbar-nav">
                             @if (AuthorizationService.AuthorizeAsync(User, "LoggedInOnly").Result.Succeeded)
                             {
-                            <li><a asp-area="" asp-controller="Home" asp-action="Home">MijnRR</a></li>
-                            <li><a asp-area="" asp-controller="Car" asp-action="CarOverview">Auto's</a></li>
-                            <li><a asp-area="" asp-controller="Invoice" asp-action="InvoiceOverview">Facturen</a></li>
-                            <li><a asp-area="" asp-controller="Home" asp-action="Logout">Uitloggen</a></li>
+                                <li><a asp-area="" asp-controller="Home" asp-action="Home">@Html.getTerm("MijnRR")</a></li>
+                                <li><a asp-area="" asp-controller="Car" asp-action="CarOverview">@Html.getTerm("Auto's")</a></li>
+                                <li><a asp-area="" asp-controller="Invoice" asp-action="InvoiceOverview">@Html.getTerm("Facturen")</a></li>
+                                <li><a asp-area="" asp-controller="Home" asp-action="Logout">@Html.getTerm("Uitloggen")</a></li>
                             }
+                        </ul>
+                    </div>
+                    <div class="LanguageNavbar">
+                        <ul class="nav navbar-nav right">
                             <li><a asp-area="" asp-controller="Language" asp-action="ChangeLanguage" asp-route-language="NLD"> NL</a></li>
                             <li><a asp-area="" asp-controller="Language" asp-action="ChangeLanguage" asp-route-language="ENG"> EN</a></li>
                         </ul>
                     </div>
+                </div>
                 
 
 

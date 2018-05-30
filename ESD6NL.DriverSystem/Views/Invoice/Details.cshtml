@@ -1,18 +1,19 @@
-﻿@model ESD6NL.DriverSystem.Models.InvoiceViewModel
+﻿@using ESD6NL.DriverSystem.Helpers
+@model ESD6NL.DriverSystem.Models.InvoiceViewModel
 
 @{
     ViewData["Title"] = "InvoiceDetail";
 }
 
-<h2>Factuur @Html.DisplayFor(model => model.invoiceId)</h2>
+<h2>@Html.getTerm("Factuur") @Html.DisplayFor(model => model.invoiceId)</h2>
 
 <table class="table  table table-striped table-bordered table-responsive table-condensed">
     <thead>
         <tr>
-            <th>Datum</th>
-            <th>Dag van de week</th>
-            <th>Gereden kilometers</th>
-            <th>Bedrag</th>
+            <th>@Html.getTerm("Datum")</th>
+            <th>@Html.getTerm("Dag van de week")</th>
+            <th>@Html.getTerm("Gereden kilometers")</th>
+            <th>@Html.getTerm("Bedrag")</th>
         </tr>
     </thead>
 
