@@ -19,6 +19,7 @@ namespace ESD6NL.DriverSystem.Entities
         public string password { get; set; }
         public string firstName { get; set; }
         public string lastName { get; set; }
+        public string Language { get; set; }
         public long citizenServiceNumber { get; set; }
         public DateTime birthDay { get; set; }
         public Address address { get; set; }

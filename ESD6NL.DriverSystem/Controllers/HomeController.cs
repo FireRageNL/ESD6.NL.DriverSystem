@@ -5,6 +5,8 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using ESD6NL.DriverSystem.BLL;
+using ESD6NL.DriverSystem.BLL.Interfaces;
+using ESD6NL.DriverSystem.Helpers;
 using Microsoft.AspNetCore.Mvc;
 using ESD6NL.DriverSystem.Models;
 using Microsoft.AspNetCore.Authentication;
@@ -13,11 +15,11 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace ESD6NL.DriverSystem.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         private IUserService _userService;
 
-        public HomeController(IUserService userService)
+        public HomeController(IUserService userService, ITranslationService ts) : base(ts)
         {
             _userService = userService;
         }
@@ -34,30 +36,25 @@ namespace ESD6NL.DriverSystem.Controllers
         [HttpPost]
         public IActionResult Index(LoginModel login)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid || !_userService.checkUserLogin(login.Password, login.Username)) return View(login);
+            var claims = new List<Claim>
             {
-                if (_userService.checkUserLogin(login.Password, login.Username))
-                {
-                    var claims = new List<Claim>
-                    {
-                        new Claim(ClaimTypes.Name, login.Username),
-                        new Claim(ClaimTypes.Role, "User"),
-                    };
+                new Claim(ClaimTypes.Name, login.Username),
+                new Claim(ClaimTypes.Role, "User"),
+            };
 
-                    var claimsIdentity = new ClaimsIdentity(
-                        claims, CookieAuthenticationDefaults.AuthenticationScheme);
+            var claimsIdentity = new ClaimsIdentity(
+                claims, CookieAuthenticationDefaults.AuthenticationScheme);
 
-                    var authProperties = new AuthenticationProperties();
+            var authProperties = new AuthenticationProperties();
 
-                     HttpContext.SignInAsync(
-                        CookieAuthenticationDefaults.AuthenticationScheme,
-                        new ClaimsPrincipal(claimsIdentity),
-                        authProperties);
-                    return RedirectToAction("Home","Home");
-                }
-            }
+            HttpContext.SignInAsync(
+                CookieAuthenticationDefaults.AuthenticationScheme,
+                new ClaimsPrincipal(claimsIdentity),
+                authProperties);
+            Response.Cookies.Append("Language",_userService.getserByUsername(login.Username).Language);
+            return RedirectToAction("Home","Home");
 
-            return View(login);
         }
 
         public IActionResult Logout()

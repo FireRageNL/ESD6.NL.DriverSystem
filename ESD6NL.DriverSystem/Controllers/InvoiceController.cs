@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ESD6NL.DriverSystem.BLL.Interfaces;
 using ESD6NL.DriverSystem.Entities;
+using ESD6NL.DriverSystem.Helpers;
 using ESD6NL.DriverSystem.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -11,7 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace ESD6NL.DriverSystem.Controllers
 {
     [Authorize]
-    public class InvoiceController : Controller
+    public class InvoiceController : BaseController
     {
         private readonly IInvoiceService _invoiceService;
 
@@ -19,7 +20,7 @@ namespace ESD6NL.DriverSystem.Controllers
         /// Contructor
         /// </summary>
         /// <param name="invoiceService"></param>
-        public InvoiceController(IInvoiceService invoiceService)
+        public InvoiceController(IInvoiceService invoiceService, ITranslationService ts) : base(ts)
         {
             _invoiceService = invoiceService;
         }

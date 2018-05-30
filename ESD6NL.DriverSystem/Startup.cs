@@ -9,6 +9,7 @@ using ESD6NL.DriverSystem.BLL.Interfaces;
 using ESD6NL.DriverSystem.DAL;
 using ESD6NL.DriverSystem.DAL.Implementations;
 using ESD6NL.DriverSystem.DAL.Interfaces;
+using ESD6NL.DriverSystem.Helpers;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -40,6 +41,8 @@ namespace ESD6NL.DriverSystem
             services.AddTransient<IInvoiceRepository, InvoiceRepository>();
             services.AddTransient<ICarService, CarService>();
             services.AddTransient<ICarRepository, CarRepository>();
+            services.AddTransient<ITranslationRepository, TranslationRepository>();
+            services.AddTransient<ITranslationService, TranslationService>();
 
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options =>

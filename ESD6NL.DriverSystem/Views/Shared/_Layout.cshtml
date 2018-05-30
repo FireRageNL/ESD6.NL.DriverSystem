@@ -38,17 +38,23 @@
                     </button>
                     <a asp-area="" asp-controller="Home" asp-action="Index" class="header-brand">Rekeningrijden</a>
                 </div>
-                @if (AuthorizationService.AuthorizeAsync(User, "LoggedInOnly").Result.Succeeded)
-                {
+
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
+                            @if (AuthorizationService.AuthorizeAsync(User, "LoggedInOnly").Result.Succeeded)
+                            {
                             <li><a asp-area="" asp-controller="Home" asp-action="Home">MijnRR</a></li>
                             <li><a asp-area="" asp-controller="Car" asp-action="CarOverview">Auto's</a></li>
                             <li><a asp-area="" asp-controller="Invoice" asp-action="InvoiceOverview">Facturen</a></li>
                             <li><a asp-area="" asp-controller="Home" asp-action="Logout">Uitloggen</a></li>
+                            }
+                            <li><a asp-area="" asp-controller="Language" asp-action="ChangeLanguage" asp-route-language="NLD"> NL</a></li>
+                            <li><a asp-area="" asp-controller="Language" asp-action="ChangeLanguage" asp-route-language="ENG"> EN</a></li>
                         </ul>
                     </div>
-                }
+                
+
+
             </div>
     </nav>
     <div class="container body-content">

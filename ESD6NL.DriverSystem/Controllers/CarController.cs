@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ESD6NL.DriverSystem.BLL.Interfaces;
 using ESD6NL.DriverSystem.Entities;
+using ESD6NL.DriverSystem.Helpers;
 using ESD6NL.DriverSystem.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -12,7 +13,7 @@ using Microsoft.AspNetCore.Server.Kestrel.Internal.System.Collections.Sequences;
 namespace ESD6NL.DriverSystem.Controllers
 {
     [Authorize]
-    public class CarController : Controller
+    public class CarController : BaseController
     {
         private readonly ICarService _carService;
 
@@ -20,7 +21,7 @@ namespace ESD6NL.DriverSystem.Controllers
         /// Constructor
         /// </summary>
         /// <param name="carService"></param>
-        public CarController(ICarService carService)
+        public CarController(ICarService carService, ITranslationService ts): base(ts)
         {
             _carService = carService;
         }

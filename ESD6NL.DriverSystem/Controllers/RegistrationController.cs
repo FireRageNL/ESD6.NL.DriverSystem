@@ -3,19 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ESD6NL.DriverSystem.BLL;
+using ESD6NL.DriverSystem.BLL.Interfaces;
 using ESD6NL.DriverSystem.Models;
 using Microsoft.AspNetCore.Mvc;
 using ESD6NL.DriverSystem.Entities;
+using ESD6NL.DriverSystem.Helpers;
 using Microsoft.AspNetCore.Identity;
 
 namespace ESD6NL.DriverSystem.Controllers
 {
-    public class RegistrationController : Controller
+    public class RegistrationController : BaseController
     {
        
         private IUserService _regSerivce;
 
-        public RegistrationController(IUserService regSerivce)
+        public RegistrationController(IUserService regSerivce, ITranslationService ts) : base(ts)
         {
             _regSerivce = regSerivce;
         }

@@ -40,6 +40,7 @@ namespace ESD6NL.DriverSystem.BLL
             toSave.address = mod.Address;
             toSave.birthDay = DateTime.ParseExact(mod.Birthday,"dd-MM-yyyy",System.Globalization.CultureInfo.InvariantCulture);
             toSave.cars = _carService.GetCarsOfUserFromAAS(1) as List<Car>;
+            toSave.Language = "NLD";
             return _repo.Add(toSave);
         }
 
@@ -58,7 +59,11 @@ namespace ESD6NL.DriverSystem.BLL
             }
             string[] passwordHashStrings = LoginTry.password.Split(':');
             return HashingHelper.Validate(password, passwordHashStrings[0], passwordHashStrings[1]);
+        }
 
+        public User getserByUsername(string username)
+        {
+            return _repo.getUserFromDatabase(username);
         }
     }
 }
