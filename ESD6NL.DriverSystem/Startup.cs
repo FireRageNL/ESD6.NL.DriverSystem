@@ -13,6 +13,7 @@ using ESD6NL.DriverSystem.Helpers;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Hosting.Internal;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -21,19 +22,29 @@ namespace ESD6NL.DriverSystem
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IHostingEnvironment environment)
         {
             Configuration = configuration;
+            Environment = environment;
         }
 
         public IConfiguration Configuration { get; }
+
+        public IHostingEnvironment Environment { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
 
-            services.AddDbContext<DriverSystemContext>(options => options.UseMySql("server=35.195.239.181;Database=driversystem;UID=root;Password=root"));
+            if (Environment.IsDevelopment())
+            {
+                services.AddDbContext<DriverSystemContext>(options => options.UseMySql("server=35.195.239.181;Database=driversystem;UID=root;Password=root"));
+            }
+            else
+            {
+                services.AddDbContext<DriverSystemContext>(options => options.UseMySql("server=172.17.0.1;Database=driversystem;UID=root;Password=root"));
+            }
 
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IUserRepository, UserRepository>();
