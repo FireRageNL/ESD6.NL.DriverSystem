@@ -43,7 +43,8 @@ namespace ESD6NL.DriverSystem
             }
             else
             {
-                services.AddDbContext<DriverSystemContext>(options => options.UseMySql("server=172.17.0.1;Database=driversystem;UID=root;Password=root"));
+                services.AddDbContext<DriverSystemContext>(options => options.UseMySql("server=127.0.0.1;Database=driversystem;UID=root;Password=root"));
+                Console.WriteLine("I should be connected to the google host");
             }
 
             services.AddTransient<IUserService, UserService>();
