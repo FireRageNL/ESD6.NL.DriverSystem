@@ -44,18 +44,5 @@ namespace ESD6.NL.DriverSystem.UnitTests
         {
             Assert.IsFalse(_userService.checkUserLogin("test12","test"));
         }
-
-        [TestMethod]
-        public void CreateUser_ReturnsUser()
-        {
-            User usr = _userService.createUser(new User()
-            {
-                password = "hello",
-                firstName = "hi",
-                lastName = "hooi"
-            });
-           
-            Assert.AreEqual("hi",usr.firstName);
-        }
     }
 }

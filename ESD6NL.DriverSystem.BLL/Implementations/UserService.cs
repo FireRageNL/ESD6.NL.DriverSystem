@@ -65,5 +65,10 @@ namespace ESD6NL.DriverSystem.BLL
         {
             return _repo.getUserFromDatabase(username);
         }
+
+        public void saveUser(User usr)
+        {
+            _repo.Update(usr);
+        }
     }
 }

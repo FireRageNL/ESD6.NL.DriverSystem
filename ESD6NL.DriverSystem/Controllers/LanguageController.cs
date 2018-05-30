@@ -27,8 +27,13 @@ namespace ESD6NL.DriverSystem.Controllers
         {
             string username = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.Value;
             Entities.User usr = _service.getserByUsername(username);
-            usr.Language = Enum.Parse<Language>(language).ToString() ?? "NLD";
-            Response.Cookies.Append("Language", usr.Language);
+            string lang = Enum.Parse<Language>(language).ToString() ?? "NLD";
+            if (usr != null)
+            {
+                usr.Language = lang;
+                _service.saveUser(usr);
+            }
+            Response.Cookies.Append("Language", lang);
             return Redirect(Request.Headers["Referer"]);
         }
     }
