@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using ESD6NL.DriverSystem.BLL.Interfaces;
@@ -63,7 +64,7 @@ namespace ESD6NL.DriverSystem.Controllers
             invoiceViewModel.invoiceId = invoice.invoiceID;
             invoiceViewModel.date = invoice.period;
             invoiceViewModel.totalKm = invoice.totalKm;
-            invoiceViewModel.totalEuros = invoice.totalAmount;
+            invoiceViewModel.totalEuros = invoice.totalAmount.ToString("0#.##", CultureInfo.InvariantCulture);
             invoiceViewModel.rows = invoice.rows;
             return invoiceViewModel;
         }

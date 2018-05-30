@@ -11,7 +11,7 @@ namespace ESD6NL.DriverSystem.Models
         public int invoiceId { get; set; }
         public DateTime date { get; set; }
         public Decimal totalKm { get; set; }
-        public Decimal totalEuros { get; set; }
+        public string totalEuros { get; set; }
         public List<Row> rows { get; set; }
     }
 }
