@@ -37,15 +37,7 @@ namespace ESD6NL.DriverSystem
         {
             services.AddMvc();
 
-            if (Environment.IsDevelopment())
-            {
-                services.AddDbContext<DriverSystemContext>(options => options.UseMySql("server=35.195.239.181;Database=driversystem;UID=root;Password=root"));
-            }
-            else
-            {
-                services.AddDbContext<DriverSystemContext>(options => options.UseMySql("server=127.0.0.1;Database=driversystem;UID=root;Password=root"));
-                Console.WriteLine("I should be connected to the google host");
-            }
+            services.AddDbContext<DriverSystemContext>(options => options.UseMySql("server=192.168.25.122;Database=DriverSystem;UID=root;Password=root"));
 
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IUserRepository, UserRepository>();
