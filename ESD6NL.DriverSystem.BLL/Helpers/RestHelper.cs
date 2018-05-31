@@ -25,7 +25,7 @@ namespace ESD6NL.DriverSystem.BLL.Helpers
         {
             return aasClient ?? (aasClient = new HttpClient
             {
-                BaseAddress = new Uri("http://localhost:8080/AccountAdministrationSystem/api/")
+                BaseAddress = new Uri("http://192.168.25.122:8080/AccountAdministrationSystem/api/")
             });
         }
 
