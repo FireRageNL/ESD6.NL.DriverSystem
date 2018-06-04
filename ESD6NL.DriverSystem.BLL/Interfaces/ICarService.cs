@@ -12,6 +12,6 @@ namespace ESD6NL.DriverSystem.BLL.Interfaces
 
         Car GetCar(int id);
 
-        IEnumerable<Car> GetCarsOfUserFromAAS(int userId);
+        IEnumerable<Car> GetCarsOfUserFromAAS(long userId);
     }
 }

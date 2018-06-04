@@ -38,14 +38,14 @@ namespace ESD6NL.DriverSystem.BLL.Implementations
             return _repo.GetSpecificCar(id);
         }
 
-        public IEnumerable<Car> GetCarsOfUserFromAAS(int userId)
+        public IEnumerable<Car> GetCarsOfUserFromAAS(long csn)
         {
-            HttpResponseMessage response = RestHelper.AasHttpClient().GetAsync($"cars").Result;
+            HttpResponseMessage response = RestHelper.AasHttpClient().GetAsync("cars/"+ csn).Result;
             response.EnsureSuccessStatusCode();
             var foundCars = response.Content.ReadAsStringAsync().Result;
             var foundCarsJson = JsonConvert.DeserializeObject<List<Car>>(foundCars); 
 
-            IEnumerable<Car> cars = foundCarsJson as IEnumerable<Car>;
+            IEnumerable<Car> cars = foundCarsJson;
             foreach(Car c in cars)
             {
                 c.rdwData = findRdwByLicensePlate(c.licensePlate);
