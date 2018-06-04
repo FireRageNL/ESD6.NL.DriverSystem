@@ -44,5 +44,12 @@ namespace ESD6NL.DriverSystem.BLL.Implementations
         {
             return _repo.GetSpecificInvoice(id);
         }
+
+        public void updateInvoice(int paidInvoiceId)
+        {
+            Invoice invoice = _repo.GetSpecificInvoice(paidInvoiceId);
+            invoice.paymentStatus = 0;
+            _repo.Update(invoice);
+        }
     }
 }
