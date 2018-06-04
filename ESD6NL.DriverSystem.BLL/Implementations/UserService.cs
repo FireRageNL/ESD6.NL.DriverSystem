@@ -39,7 +39,7 @@ namespace ESD6NL.DriverSystem.BLL
             RestUserModel mod = JsonConvert.DeserializeObject<RestUserModel>(msg);
             toSave.address = mod.Address;
             toSave.birthDay = DateTime.ParseExact(mod.Birthday,"dd-MM-yyyy",System.Globalization.CultureInfo.InvariantCulture);
-            toSave.cars = _carService.GetCarsOfUserFromAAS(1) as List<Car>;
+            toSave.cars = _carService.GetCarsOfUserFromAAS(toSave.citizenServiceNumber) as List<Car>;
             toSave.Language = "NLD";
             return _repo.Add(toSave);
         }
