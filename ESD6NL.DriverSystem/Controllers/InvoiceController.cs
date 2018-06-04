@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using ESD6NL.DriverSystem.BLL;
 using ESD6NL.DriverSystem.BLL.Interfaces;
 using ESD6NL.DriverSystem.Entities;
 using ESD6NL.DriverSystem.Helpers;
@@ -16,14 +18,16 @@ namespace ESD6NL.DriverSystem.Controllers
     public class InvoiceController : BaseController
     {
         private readonly IInvoiceService _invoiceService;
+        private readonly IUserService _userService;
 
         /// <summary>
         /// Contructor
         /// </summary>
         /// <param name="invoiceService"></param>
-        public InvoiceController(IInvoiceService invoiceService, ITranslationService ts) : base(ts)
+        public InvoiceController(IInvoiceService invoiceService, ITranslationService ts, IUserService userService) : base(ts)
         {
             _invoiceService = invoiceService;
+            _userService = userService;
         }
 
         /// <summary>
@@ -32,7 +36,10 @@ namespace ESD6NL.DriverSystem.Controllers
         /// <returns>invoice overview view</returns>
         public IActionResult InvoiceOverview()
         {
-            var invoice = _invoiceService.GetAllInvoices(88888888888) as List<Invoice>;
+            string username = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.Value;
+            Entities.User usr = _userService.getserByUsername(username);
+
+            var invoice = _invoiceService.GetAllInvoices(usr.citizenServiceNumber) as List<Invoice>;
             var userViewModel = FillUserViewModel(invoice);
 
             return View(userViewModel);
