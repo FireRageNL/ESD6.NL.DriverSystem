@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace ESD6NL.DriverSystem.Entities
 {
     public class Invoice
     {
-        public int invoiceID { get; set; }
-        public long invoiceNumber { get; set; }
+        public long invoiceNr { get; set; }
         public PaymentStatus paymentStatus { get; set; }
         public DateTime period { get; set; }
         public Decimal totalKm { get; set; }

@@ -23,9 +23,9 @@ namespace ESD6NL.DriverSystem.DAL.Implementations
         /// </summary>
         /// <param name="invoiceId"></param>
         /// <returns></returns>
-        public Invoice GetSpecificInvoice(int invoiceId)
+        public Invoice GetSpecificInvoice(long invoiceId)
         {
-            return (from x in _context.Invoices where x.invoiceID == invoiceId select x).SingleOrDefault();
+            return (from x in _context.Invoices where x.invoiceNr == invoiceId select x).SingleOrDefault();
         }
     }
 }

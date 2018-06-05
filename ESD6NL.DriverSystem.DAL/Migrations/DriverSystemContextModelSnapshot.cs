@@ -69,12 +69,10 @@ namespace ESD6NL.DriverSystem.DAL.Migrations
 
             modelBuilder.Entity("ESD6NL.DriverSystem.Entities.Invoice", b =>
                 {
-                    b.Property<int>("invoiceID")
+                    b.Property<long>("invoiceNr")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("filePath");
-
-                    b.Property<long>("invoiceNumber");
 
                     b.Property<int>("paymentStatus");
 
@@ -86,7 +84,7 @@ namespace ESD6NL.DriverSystem.DAL.Migrations
 
                     b.Property<int?>("userID");
 
-                    b.HasKey("invoiceID");
+                    b.HasKey("invoiceNr");
 
                     b.HasIndex("userID");
 
@@ -246,13 +244,13 @@ namespace ESD6NL.DriverSystem.DAL.Migrations
 
                     b.Property<string>("dayOfWeek");
 
-                    b.Property<int?>("invoiceID");
+                    b.Property<long?>("invoiceNr");
 
                     b.Property<decimal>("km");
 
                     b.HasKey("rowId");
 
-                    b.HasIndex("invoiceID");
+                    b.HasIndex("invoiceNr");
 
                     b.ToTable("Row");
                 });
@@ -332,7 +330,7 @@ namespace ESD6NL.DriverSystem.DAL.Migrations
                 {
                     b.HasOne("ESD6NL.DriverSystem.Entities.Invoice")
                         .WithMany("rows")
-                        .HasForeignKey("invoiceID");
+                        .HasForeignKey("invoiceNr");
                 });
 
             modelBuilder.Entity("ESD6NL.DriverSystem.Entities.User", b =>

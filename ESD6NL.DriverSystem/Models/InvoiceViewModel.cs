@@ -8,7 +8,7 @@ namespace ESD6NL.DriverSystem.Models
 {
     public class InvoiceViewModel
     {
-        public int invoiceId { get; set; }
+        public long invoiceId { get; set; }
         public DateTime date { get; set; }
         public Decimal totalKm { get; set; }
         public string totalEuros { get; set; }

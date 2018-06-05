@@ -12,8 +12,8 @@ using System;
 namespace ESD6NL.DriverSystem.DAL.Migrations
 {
     [DbContext(typeof(DriverSystemContext))]
-    [Migration("20180527150728_UniqueUsernameAndEmail")]
-    partial class UniqueUsernameAndEmail
+    [Migration("20180605090049_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -70,12 +70,10 @@ namespace ESD6NL.DriverSystem.DAL.Migrations
 
             modelBuilder.Entity("ESD6NL.DriverSystem.Entities.Invoice", b =>
                 {
-                    b.Property<int>("invoiceID")
+                    b.Property<long>("invoiceNumber")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("filePath");
-
-                    b.Property<long>("invoiceNumber");
 
                     b.Property<int>("paymentStatus");
 
@@ -87,7 +85,7 @@ namespace ESD6NL.DriverSystem.DAL.Migrations
 
                     b.Property<int?>("userID");
 
-                    b.HasKey("invoiceID");
+                    b.HasKey("invoiceNumber");
 
                     b.HasIndex("userID");
 
@@ -99,6 +97,104 @@ namespace ESD6NL.DriverSystem.DAL.Migrations
                     b.Property<int>("RdwID")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("aantal_cilinders");
+
+                    b.Property<string>("aantal_deuren");
+
+                    b.Property<string>("aantal_rolstoelplaatsen");
+
+                    b.Property<string>("aantal_wielen");
+
+                    b.Property<string>("aantal_zitplaatsen");
+
+                    b.Property<string>("afstand_hart_koppeling_tot_achterzijde_voertuig");
+
+                    b.Property<string>("afstand_voorzijde_voertuig_tot_hart_koppeling");
+
+                    b.Property<string>("api_gekentekende_voertuigen_assen");
+
+                    b.Property<string>("api_gekentekende_voertuigen_brandstof");
+
+                    b.Property<string>("api_gekentekende_voertuigen_carrosserie");
+
+                    b.Property<string>("api_gekentekende_voertuigen_carrosserie_specifiek");
+
+                    b.Property<string>("api_gekentekende_voertuigen_voertuigklasse");
+
+                    b.Property<string>("breedte");
+
+                    b.Property<string>("bruto_bpm");
+
+                    b.Property<string>("catalogusprijs");
+
+                    b.Property<string>("cilinderinhoud");
+
+                    b.Property<string>("datum_eerste_afgifte_nederland");
+
+                    b.Property<string>("datum_eerste_toelating");
+
+                    b.Property<string>("datum_tenaamstelling");
+
+                    b.Property<string>("eerste_kleur");
+
+                    b.Property<string>("europese_voertuigcategorie");
+
+                    b.Property<string>("export_indicator");
+
+                    b.Property<string>("handelsbenaming");
+
+                    b.Property<string>("inrichting");
+
+                    b.Property<string>("kenteken");
+
+                    b.Property<string>("lengte");
+
+                    b.Property<string>("massa_ledig_voertuig");
+
+                    b.Property<string>("massa_rijklaar");
+
+                    b.Property<string>("maximum_massa_samenstelling");
+
+                    b.Property<string>("maximum_massa_trekken_ongeremd");
+
+                    b.Property<string>("maximum_trekken_massa_geremd");
+
+                    b.Property<string>("merk");
+
+                    b.Property<string>("openstaande_terugroepactie_indicator");
+
+                    b.Property<string>("plaats_chassisnummer");
+
+                    b.Property<string>("taxi_indicator");
+
+                    b.Property<string>("technische_max_massa_voertuig");
+
+                    b.Property<string>("toegestane_maximum_massa_voertuig");
+
+                    b.Property<string>("tweede_kleur");
+
+                    b.Property<string>("typegoedkeuringsnummer");
+
+                    b.Property<string>("uitvoering");
+
+                    b.Property<string>("variant");
+
+                    b.Property<string>("vermogen_massarijklaar");
+
+                    b.Property<string>("vervaldatum_apk");
+
+                    b.Property<string>("voertuigsoort");
+
+                    b.Property<string>("volgnummer_wijziging_eu_typegoedkeuring");
+
+                    b.Property<string>("wacht_op_keuren");
+
+                    b.Property<string>("wam_verzekerd");
+
+                    b.Property<string>("wielbasis");
+
+                    b.Property<string>("zuinigheidslabel");
+
                     b.HasKey("RdwID");
 
                     b.ToTable("RDW");
@@ -108,6 +204,30 @@ namespace ESD6NL.DriverSystem.DAL.Migrations
                 {
                     b.Property<int>("RDWFuelID")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<string>("brandstof_omschrijving");
+
+                    b.Property<string>("brandstof_volgnummer");
+
+                    b.Property<string>("brandstofverbruik_buiten");
+
+                    b.Property<string>("brandstofverbruik_gecombineerd");
+
+                    b.Property<string>("brandstofverbruik_stad");
+
+                    b.Property<string>("co2_uitstoot_gecombineerd");
+
+                    b.Property<string>("emissiecode_omschrijving");
+
+                    b.Property<string>("geluidsniveau_stationair");
+
+                    b.Property<string>("kenteken");
+
+                    b.Property<string>("milieuklasse_eg_goedkeuring_licht");
+
+                    b.Property<string>("nettomaximumvermogen");
+
+                    b.Property<string>("toerental_geluidsniveau");
 
                     b.HasKey("RDWFuelID");
 
@@ -125,9 +245,13 @@ namespace ESD6NL.DriverSystem.DAL.Migrations
 
                     b.Property<string>("dayOfWeek");
 
+                    b.Property<long?>("invoiceNumber");
+
                     b.Property<decimal>("km");
 
                     b.HasKey("rowId");
+
+                    b.HasIndex("invoiceNumber");
 
                     b.ToTable("Row");
                 });
@@ -154,6 +278,8 @@ namespace ESD6NL.DriverSystem.DAL.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<int?>("AddressID");
+
+                    b.Property<string>("Language");
 
                     b.Property<DateTime>("birthDay");
 
@@ -199,6 +325,13 @@ namespace ESD6NL.DriverSystem.DAL.Migrations
                     b.HasOne("ESD6NL.DriverSystem.Entities.User")
                         .WithMany("invoices")
                         .HasForeignKey("userID");
+                });
+
+            modelBuilder.Entity("ESD6NL.DriverSystem.Entities.Row", b =>
+                {
+                    b.HasOne("ESD6NL.DriverSystem.Entities.Invoice")
+                        .WithMany("rows")
+                        .HasForeignKey("invoiceNumber");
                 });
 
             modelBuilder.Entity("ESD6NL.DriverSystem.Entities.User", b =>

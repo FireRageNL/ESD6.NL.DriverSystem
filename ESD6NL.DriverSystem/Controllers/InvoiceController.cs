@@ -117,12 +117,14 @@ namespace ESD6NL.DriverSystem.Controllers
 
         public InvoiceViewModel FillInvoiceViewModel(Invoice invoice)
         {
-            InvoiceViewModel invoiceViewModel = new InvoiceViewModel();
-            invoiceViewModel.invoiceId = invoice.invoiceID;
-            invoiceViewModel.date = invoice.period;
-            invoiceViewModel.totalKm = invoice.totalKm;
-            invoiceViewModel.totalEuros = invoice.totalAmount.ToString("0#.##", CultureInfo.InvariantCulture);
-            invoiceViewModel.rows = invoice.rows;
+            InvoiceViewModel invoiceViewModel = new InvoiceViewModel
+            {
+                invoiceId = invoice.invoiceNr,
+                date = invoice.period,
+                totalKm = invoice.totalKm,
+                totalEuros = invoice.totalAmount.ToString("0#.##", CultureInfo.InvariantCulture),
+                rows = invoice.rows
+            };
             return invoiceViewModel;
         }
     }

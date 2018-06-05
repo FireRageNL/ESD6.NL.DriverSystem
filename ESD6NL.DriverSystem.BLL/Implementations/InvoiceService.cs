@@ -30,8 +30,13 @@ namespace ESD6NL.DriverSystem.BLL.Implementations
             var foundInvoices = response.Content.ReadAsStringAsync().Result;
             var foundInvoicesJson = JsonConvert.DeserializeObject<List<Invoice>>(foundInvoices);
 
-            foreach(Invoice i in foundInvoicesJson)
-            _repo.Add(i);
+            foreach (Invoice i in foundInvoicesJson)
+            {
+                if (_repo.GetSpecificInvoice(i.invoiceNr) == null)
+                {
+                    _repo.Add(i);
+                }
+            }
             return foundInvoicesJson;
         }
 

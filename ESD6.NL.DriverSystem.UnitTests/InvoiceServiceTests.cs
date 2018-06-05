@@ -18,8 +18,7 @@ namespace ESD6.NL.DriverSystem.UnitTests
             var mock = new Mock<IInvoiceRepository>();
             mock.Setup(garage => garage.GetSpecificInvoice(1)).Returns(new Invoice()
             {
-                invoiceID = 1,
-                invoiceNumber = 1,
+                invoiceNr = 1,
                 paymentStatus = PaymentStatus.Open,
                 period = new System.DateTime(),
                 totalKm = 1,
@@ -33,8 +32,7 @@ namespace ESD6.NL.DriverSystem.UnitTests
         [TestMethod]
         public void getSpecificInvoice_ExcistingInvoice_InvoiceDetail()
         {
-            Assert.AreEqual(1, _invoiceService.GetInvoice(1).invoiceID);
-            Assert.AreEqual(1, _invoiceService.GetInvoice(1).invoiceNumber);
+            Assert.AreEqual(1, _invoiceService.GetInvoice(1).invoiceNr);
             Assert.AreEqual(PaymentStatus.Open, _invoiceService.GetInvoice(1).paymentStatus);
             Assert.AreEqual(1, _invoiceService.GetInvoice(1).totalKm);
             Assert.AreEqual(1, _invoiceService.GetInvoice(1).totalAmount);
@@ -45,7 +43,7 @@ namespace ESD6.NL.DriverSystem.UnitTests
         [ExpectedException(typeof(NullReferenceException), "An id is used that does not yet excist.")]
         public void getSoecificInvoice_FakeInvoice_ErrorMessage()
         {
-            var testvalue = _invoiceService.GetInvoice(2).invoiceNumber;
+            var testvalue = _invoiceService.GetInvoice(2).invoiceNr;
         }
     }
 }
