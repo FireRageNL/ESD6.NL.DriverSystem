@@ -1,0 +1,26 @@
+﻿body {
+
+}
+
+.column-container {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+    display: flex;
+    flex-direction: column;
+    width: 1170px;
+}
+
+.header-brand {
+    float: none;
+    padding: 15px 15px;
+    font-size: 40px;
+    line-height: 80px;
+    color: #9d9d9d;
+}
+
+    .header-brand:hover {
+        color: #fff;
+        background-color: transparent;
+    }

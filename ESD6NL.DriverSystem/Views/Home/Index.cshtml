@@ -1,0 +1,32 @@
+﻿@using ESD6NL.DriverSystem.Helpers
+@model ESD6NL.DriverSystem.Models.LoginModel
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Index">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label for="Username">@Html.getTerm("Username")</label>
+                <input asp-for="Username" class="form-control" />
+                <span asp-validation-for="Username" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="Password">@Html.getTerm("Password")</label>
+                <input asp-for="Password" class="form-control"/>
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Login" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>@Html.getTerm("Or") <a asp-controller="Registration" asp-action="Index">@Html.getTerm("register")</a> @Html.getTerm("if you do not yet have a account") </div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

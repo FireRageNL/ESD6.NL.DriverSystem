@@ -1,0 +1,53 @@
+﻿@using ESD6NL.DriverSystem.Helpers
+
+@{
+    ViewData["Title"] = "Home";
+}
+
+
+<body>
+
+    <div class="container">
+        <!-- ROW -->
+        <div class="row">   
+
+            <!-- Invoices -->
+            <div class="col-lg-4 col-md-6 col-sm-6">
+                <a asp-controller="Invoice" asp-action="InvoiceOverview">
+                    <div class="card" id="YouTrackCard">
+                        <div class="card-body">
+                            <h4 class="card-title">@Html.getTerm("Facturen Overzicht")</h4>
+                            <p class="card-text">@Html.getTerm("Voor al uw facturen van de afgelopen 5 jaar.")
+                            </p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Payment -->
+            <div class="col-lg-4 col-md-6 col-sm-6">
+                <a href="#">
+                    <div class="card" id="JenkinsCard">
+                        <div class="card-body">
+                            <h4 class="card-title">@Html.getTerm("Betalen van laatste Factuur")</h4>
+                            <p class="card-text">@Html.getTerm("De laatst onbetaalde factuur meteen betalen.")</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- MijnRR -->
+            <div class="col-lg-4 col-md-6 col-sm-6">
+                <a href="#">
+                    <div class="card" id="ArtifactoryCard">
+                        <div class="card-body">
+                            <h4 class="card-title">@Html.getTerm("MijnRR")</h4>
+                            <p class="card-text">@Html.getTerm("Controleer uw account gegevens en de auto's die op uw naam zijn geregistreerd.")</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+        </div>	<!-- ROW END -->
+    </div>
+</body>

@@ -1,0 +1,37 @@
+﻿@using ESD6NL.DriverSystem.Helpers
+@model ESD6NL.DriverSystem.Models.UserViewModel
+
+@{
+    ViewData["Title"] = "CarOverview";
+}
+
+<h2>@Html.getTerm("Car Overview")</h2>
+
+<table class="table  table table-striped table-bordered table-responsive table-condensed">
+    <thead>
+        <tr>
+            <th>@Html.getTerm("Nummerplaat")</th>
+            <th>@Html.getTerm("Merk")</th>
+            <th>@Html.getTerm("Soort")</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @{
+            foreach (var car in Model.cars)
+            {
+                <text>
+
+                    <tr>
+                        <td><a asp-action="Details" asp-controller="Car" asp-route-id="@car.CarID">@car.licensePlate</a></td>
+                        <td>@car.rdwData.merk</td>
+                        <td>@car.rdwData.voertuigsoort</td>
+                    </tr>
+
+                </text>
+
+            }
+        }
+
+    </tbody>
+</table>
