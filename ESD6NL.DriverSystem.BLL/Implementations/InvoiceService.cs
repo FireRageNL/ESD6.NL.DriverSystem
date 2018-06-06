@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Net.Http;
 using ESD6NL.DriverSystem.BLL.Helpers;
+using ESD6NL.DriverSystem.BLL.RestModels;
 using Newtonsoft.Json;
 
 namespace ESD6NL.DriverSystem.BLL.Implementations
@@ -28,8 +29,16 @@ namespace ESD6NL.DriverSystem.BLL.Implementations
             HttpResponseMessage response = RestHelper.AasHttpClient().GetAsync($"invoices/" + citizenServiceNumber).Result;
             response.EnsureSuccessStatusCode();
             var foundInvoices = response.Content.ReadAsStringAsync().Result;
-            var foundInvoicesJson = JsonConvert.DeserializeObject<List<Invoice>>(foundInvoices);
+            var invoiceModels = JsonConvert.DeserializeObject<List<RestInvoiceModel>>(foundInvoices);
+            List<Invoice> foundInvoicesJson = new List<Invoice>();
+            invoiceModels.ForEach(i => foundInvoicesJson.Add(new Invoice()
+            {
+                invoiceNr = i.invoiceNr,
+                paymentStatus = i.paymentStatus,
+                period = i.date,
+                totalAmount = i.totalAmount
 
+            }));
             foreach (Invoice i in foundInvoicesJson)
             {
                 if (_repo.GetSpecificInvoice(i.invoiceNr) == null)
