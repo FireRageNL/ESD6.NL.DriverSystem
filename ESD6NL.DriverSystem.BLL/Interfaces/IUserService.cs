@@ -9,8 +9,10 @@ namespace ESD6NL.DriverSystem.BLL
 
         bool checkUserLogin(string password, string username);
 
-        User getserByUsername(string username);
+        User getUserByUsername(string username);
 
         void saveUser(User usr);
+
+        void syncUser(User usr);
     }
 }

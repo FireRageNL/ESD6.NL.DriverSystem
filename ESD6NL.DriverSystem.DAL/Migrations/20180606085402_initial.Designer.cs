@@ -12,8 +12,8 @@ using System;
 namespace ESD6NL.DriverSystem.DAL.Migrations
 {
     [DbContext(typeof(DriverSystemContext))]
-    [Migration("20180605090049_Initial")]
-    partial class Initial
+    [Migration("20180606085402_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -59,6 +59,9 @@ namespace ESD6NL.DriverSystem.DAL.Migrations
 
                     b.HasKey("CarID");
 
+                    b.HasIndex("licensePlate")
+                        .IsUnique();
+
                     b.HasIndex("rdwDataRdwID");
 
                     b.HasIndex("rdwFuelDataRDWFuelID");
@@ -70,7 +73,7 @@ namespace ESD6NL.DriverSystem.DAL.Migrations
 
             modelBuilder.Entity("ESD6NL.DriverSystem.Entities.Invoice", b =>
                 {
-                    b.Property<long>("invoiceNumber")
+                    b.Property<long>("invoiceNr")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("filePath");
@@ -85,7 +88,7 @@ namespace ESD6NL.DriverSystem.DAL.Migrations
 
                     b.Property<int?>("userID");
 
-                    b.HasKey("invoiceNumber");
+                    b.HasKey("invoiceNr");
 
                     b.HasIndex("userID");
 
@@ -245,13 +248,13 @@ namespace ESD6NL.DriverSystem.DAL.Migrations
 
                     b.Property<string>("dayOfWeek");
 
-                    b.Property<long?>("invoiceNumber");
+                    b.Property<long?>("invoiceNr");
 
                     b.Property<decimal>("km");
 
                     b.HasKey("rowId");
 
-                    b.HasIndex("invoiceNumber");
+                    b.HasIndex("invoiceNr");
 
                     b.ToTable("Row");
                 });
@@ -290,6 +293,8 @@ namespace ESD6NL.DriverSystem.DAL.Migrations
                     b.Property<string>("firstName");
 
                     b.Property<string>("lastName");
+
+                    b.Property<DateTime>("lastSyncTime");
 
                     b.Property<string>("password");
 
@@ -331,7 +336,7 @@ namespace ESD6NL.DriverSystem.DAL.Migrations
                 {
                     b.HasOne("ESD6NL.DriverSystem.Entities.Invoice")
                         .WithMany("rows")
-                        .HasForeignKey("invoiceNumber");
+                        .HasForeignKey("invoiceNr");
                 });
 
             modelBuilder.Entity("ESD6NL.DriverSystem.Entities.User", b =>

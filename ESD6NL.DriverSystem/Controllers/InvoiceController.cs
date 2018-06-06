@@ -21,13 +21,12 @@ namespace ESD6NL.DriverSystem.Controllers
     public class InvoiceController : BaseController
     {
         private readonly IInvoiceService _invoiceService;
-        private readonly IUserService _userService;
 
         /// <summary>
         /// Contructor
         /// </summary>
         /// <param name="invoiceService"></param>
-        public InvoiceController(IInvoiceService invoiceService, ITranslationService ts, IUserService userService) : base(ts)
+        public InvoiceController(IInvoiceService invoiceService, ITranslationService ts, IUserService userService) : base(ts,userService)
         {
             _invoiceService = invoiceService;
             _userService = userService;
@@ -39,10 +38,8 @@ namespace ESD6NL.DriverSystem.Controllers
         /// <returns>invoice overview view</returns>
         public IActionResult InvoiceOverview()
         {
-            string username = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.Value;
-            Entities.User usr = _userService.getserByUsername(username);
 
-            var invoice = _invoiceService.GetAllInvoices(usr.citizenServiceNumber) as List<Invoice>;
+            var invoice = _invoiceService.GetAllInvoices(getUser().citizenServiceNumber) as List<Invoice>;
             var userViewModel = FillUserViewModel(invoice);
 
             return View(userViewModel);

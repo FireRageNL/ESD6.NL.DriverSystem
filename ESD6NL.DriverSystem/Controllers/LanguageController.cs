@@ -26,7 +26,7 @@ namespace ESD6NL.DriverSystem.Controllers
         public IActionResult ChangeLanguage(string language)
         {
             string username = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.Value;
-            Entities.User usr = _service.getserByUsername(username);
+            Entities.User usr = _service.getUserByUsername(username);
             string lang = Enum.Parse<Language>(language).ToString() ?? "NLD";
             if (usr != null)
             {

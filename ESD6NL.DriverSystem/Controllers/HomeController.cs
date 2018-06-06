@@ -6,6 +6,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using ESD6NL.DriverSystem.BLL;
 using ESD6NL.DriverSystem.BLL.Interfaces;
+using ESD6NL.DriverSystem.Entities;
 using ESD6NL.DriverSystem.Helpers;
 using Microsoft.AspNetCore.Mvc;
 using ESD6NL.DriverSystem.Models;
@@ -17,9 +18,7 @@ namespace ESD6NL.DriverSystem.Controllers
 {
     public class HomeController : BaseController
     {
-        private IUserService _userService;
-
-        public HomeController(IUserService userService, ITranslationService ts) : base(ts)
+        public HomeController(IUserService userService, ITranslationService ts) : base(ts,userService)
         {
             _userService = userService;
         }
@@ -52,7 +51,9 @@ namespace ESD6NL.DriverSystem.Controllers
                 CookieAuthenticationDefaults.AuthenticationScheme,
                 new ClaimsPrincipal(claimsIdentity),
                 authProperties);
-            Response.Cookies.Append("Language",_userService.getserByUsername(login.Username).Language);
+            User loggedInUser = _userService.getUserByUsername(login.Username);
+            _userService.syncUser(loggedInUser);
+            Response.Cookies.Append("Language",loggedInUser.Language);
             return RedirectToAction("Home","Home");
 
         }

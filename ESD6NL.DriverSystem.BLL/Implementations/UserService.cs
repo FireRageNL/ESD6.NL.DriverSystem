@@ -41,6 +41,7 @@ namespace ESD6NL.DriverSystem.BLL
             toSave.birthDay = DateTime.ParseExact(mod.Birthday,"dd-MM-yyyy",System.Globalization.CultureInfo.InvariantCulture);
             toSave.cars = _carService.GetCarsOfUserFromAAS(toSave.citizenServiceNumber) as List<Car>;
             toSave.Language = "NLD";
+            toSave.lastSyncTime = DateTime.Now;
             return _repo.Add(toSave);
         }
 
@@ -61,7 +62,7 @@ namespace ESD6NL.DriverSystem.BLL
             return HashingHelper.Validate(password, passwordHashStrings[0], passwordHashStrings[1]);
         }
 
-        public User getserByUsername(string username)
+        public User getUserByUsername(string username)
         {
             return _repo.getUserFromDatabase(username);
         }
@@ -69,6 +70,15 @@ namespace ESD6NL.DriverSystem.BLL
         public void saveUser(User usr)
         {
             _repo.Update(usr);
+        }
+
+        public void syncUser(User usr)
+        {
+            if (usr.lastSyncTime >= DateTime.Now.AddDays(-1)) return;
+           _carService.updateCarsForUser(usr);
+            _repo.Update(usr);
+
+
         }
     }
 }

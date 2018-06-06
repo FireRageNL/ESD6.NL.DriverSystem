@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using Microsoft.EntityFrameworkCore;
 
 namespace ESD6NL.DriverSystem.DAL.Implementations
@@ -19,23 +20,10 @@ namespace ESD6NL.DriverSystem.DAL.Implementations
 
         }
 
-        /// <summary>
-        /// Get all cars from database.
-        /// </summary>
-        /// <param name="citizenServiceNumber"></param>
-        /// <returns></returns>
-        public IEnumerable<Car> GetAllCars(int citizenServiceNumber)
+        public IEnumerable<Car> getCarsForUser(long citizenServiceNumber)
         {
-            return _context.Cars.Include(x => x.rdwData)
-                .Include(x => x.rdwFuelData)
-                .Select(x => new Car
-                {
-                    CarID = x.CarID,
-                    carTrackerID = x.carTrackerID,
-                    licensePlate = x.licensePlate,
-                    rdwData = x.rdwData,
-                    rdwFuelData = x.rdwFuelData
-                });
+            User usr = _context.Users.SingleOrDefault(x => x.citizenServiceNumber == citizenServiceNumber) ?? throw new ArgumentNullException("_context.Users.Where(x => x.citizenServiceNumber == citizenServiceNumber).SingleOrDefault()");
+            return usr.cars;
         }
 
         /// <summary>

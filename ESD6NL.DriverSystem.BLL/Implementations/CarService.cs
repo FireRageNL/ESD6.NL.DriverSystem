@@ -1,9 +1,11 @@
-﻿using ESD6NL.DriverSystem.BLL.Helpers;
+﻿using System;
+using ESD6NL.DriverSystem.BLL.Helpers;
 using ESD6NL.DriverSystem.BLL.Interfaces;
 using ESD6NL.DriverSystem.DAL.Interfaces;
 using ESD6NL.DriverSystem.Entities;
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -23,11 +25,6 @@ namespace ESD6NL.DriverSystem.BLL.Implementations
             _repo = repo;
         }
 
-        public IEnumerable<Car> GetAllCars(int citizenServiceNumber)
-        {
-            return _repo.GetAllCars(citizenServiceNumber);
-        }
-
         /// <summary>
         /// Gets all the information of one specific car with the id of that car. 
         /// </summary>
@@ -40,18 +37,37 @@ namespace ESD6NL.DriverSystem.BLL.Implementations
 
         public IEnumerable<Car> GetCarsOfUserFromAAS(long csn)
         {
-            HttpResponseMessage response = RestHelper.AasHttpClient().GetAsync("cars/"+ csn).Result;
-            response.EnsureSuccessStatusCode();
-            var foundCars = response.Content.ReadAsStringAsync().Result;
-            var foundCarsJson = JsonConvert.DeserializeObject<List<Car>>(foundCars); 
-
-            IEnumerable<Car> cars = foundCarsJson;
-            foreach(Car c in cars)
+            IEnumerable<Car> userCars = _repo.getCarsForUser(csn);
+            List<Car> filledCars = new List<Car>();
+            userCars.ToList().ForEach(c =>
             {
-                c.rdwData = findRdwByLicensePlate(c.licensePlate);
-                c.rdwFuelData = findRdwFuelByLicensePlate(c.licensePlate);
+                Car cr = GetCar(c.CarID);
+                filledCars.Add(cr);
+            });
+            return filledCars;
+        }
+
+        public void updateCarsForUser(User usr)
+        {
+           IEnumerable<Car> cars = GetCarsOfUserFromAAS(usr.citizenServiceNumber);
+           cars.ToList().ForEach(c =>
+           {
+               var match = usr.cars.Where(ca => String.Equals(ca.licensePlate, c.licensePlate));
+               if (!match.Any())
+               {
+                   usr.cars.Add(c);
+               }
+           });
+            List<Car> toRemove = new List<Car>();
+        usr.cars.ForEach(c =>
+        {
+            var match = cars.ToList().Where(ca => String.Equals(ca.licensePlate, c.licensePlate));
+            if (!match.Any())
+            {
+                toRemove.Add(c);
             }
-            return cars;
+        });
+        toRemove.ForEach(c => usr.cars.Remove(c));
         }
 
         public RDW findRdwByLicensePlate(string licensePlate)

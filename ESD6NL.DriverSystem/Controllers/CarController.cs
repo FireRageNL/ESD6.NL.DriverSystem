@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ESD6NL.DriverSystem.BLL;
 using ESD6NL.DriverSystem.BLL.Interfaces;
 using ESD6NL.DriverSystem.Entities;
 using ESD6NL.DriverSystem.Helpers;
@@ -21,7 +22,7 @@ namespace ESD6NL.DriverSystem.Controllers
         /// Constructor
         /// </summary>
         /// <param name="carService"></param>
-        public CarController(ICarService carService, ITranslationService ts): base(ts)
+        public CarController(ICarService carService, ITranslationService ts, IUserService us): base(ts,us)
         {
             _carService = carService;
         }
@@ -32,8 +33,8 @@ namespace ESD6NL.DriverSystem.Controllers
         /// <returns></returns>
         public IActionResult CarOverview()
         {
-            var car = _carService.GetAllCars(1);
-            var userViewModel = FillUserViewModel(car);
+            IEnumerable<Car> cars = _carService.GetCarsOfUserFromAAS(getUser().citizenServiceNumber);
+            var userViewModel = FillUserViewModel(cars);
 
             return View(userViewModel);
         }

@@ -25,5 +25,6 @@ namespace ESD6NL.DriverSystem.Entities
         public Address address { get; set; }
         public List<Car> cars { get; set; }
         public List<Invoice> invoices { get; set; }
+        public DateTime lastSyncTime { get; set; }
     }
 }

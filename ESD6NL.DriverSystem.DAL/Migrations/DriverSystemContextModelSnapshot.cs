@@ -58,6 +58,9 @@ namespace ESD6NL.DriverSystem.DAL.Migrations
 
                     b.HasKey("CarID");
 
+                    b.HasIndex("licensePlate")
+                        .IsUnique();
+
                     b.HasIndex("rdwDataRdwID");
 
                     b.HasIndex("rdwFuelDataRDWFuelID");
@@ -289,6 +292,8 @@ namespace ESD6NL.DriverSystem.DAL.Migrations
                     b.Property<string>("firstName");
 
                     b.Property<string>("lastName");
+
+                    b.Property<DateTime>("lastSyncTime");
 
                     b.Property<string>("password");
 

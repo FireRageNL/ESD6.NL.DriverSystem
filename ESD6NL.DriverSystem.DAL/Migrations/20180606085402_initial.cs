@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace ESD6NL.DriverSystem.DAL.Migrations
 {
-    public partial class Initial : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -139,6 +139,7 @@ namespace ESD6NL.DriverSystem.DAL.Migrations
                     email = table.Column<string>(nullable: true),
                     firstName = table.Column<string>(nullable: true),
                     lastName = table.Column<string>(nullable: true),
+                    lastSyncTime = table.Column<DateTime>(nullable: false),
                     password = table.Column<string>(nullable: true),
                     userName = table.Column<string>(nullable: true)
                 },
@@ -192,7 +193,7 @@ namespace ESD6NL.DriverSystem.DAL.Migrations
                 name: "Invoices",
                 columns: table => new
                 {
-                    invoiceNumber = table.Column<long>(nullable: false)
+                    invoiceNr = table.Column<long>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     filePath = table.Column<string>(nullable: true),
                     paymentStatus = table.Column<int>(nullable: false),
@@ -203,7 +204,7 @@ namespace ESD6NL.DriverSystem.DAL.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Invoices", x => x.invoiceNumber);
+                    table.PrimaryKey("PK_Invoices", x => x.invoiceNr);
                     table.ForeignKey(
                         name: "FK_Invoices_Users_userID",
                         column: x => x.userID,
@@ -221,19 +222,25 @@ namespace ESD6NL.DriverSystem.DAL.Migrations
                     costs = table.Column<decimal>(nullable: false),
                     date = table.Column<DateTime>(nullable: false),
                     dayOfWeek = table.Column<string>(nullable: true),
-                    invoiceNumber = table.Column<long>(nullable: true),
+                    invoiceNr = table.Column<long>(nullable: true),
                     km = table.Column<decimal>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Row", x => x.rowId);
                     table.ForeignKey(
-                        name: "FK_Row_Invoices_invoiceNumber",
-                        column: x => x.invoiceNumber,
+                        name: "FK_Row_Invoices_invoiceNr",
+                        column: x => x.invoiceNr,
                         principalTable: "Invoices",
-                        principalColumn: "invoiceNumber",
+                        principalColumn: "invoiceNr",
                         onDelete: ReferentialAction.Restrict);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Cars_licensePlate",
+                table: "Cars",
+                column: "licensePlate",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Cars_rdwDataRdwID",
@@ -256,9 +263,9 @@ namespace ESD6NL.DriverSystem.DAL.Migrations
                 column: "userID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Row_invoiceNumber",
+                name: "IX_Row_invoiceNr",
                 table: "Row",
-                column: "invoiceNumber");
+                column: "invoiceNr");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Users_AddressID",

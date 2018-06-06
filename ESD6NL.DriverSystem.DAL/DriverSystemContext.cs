@@ -16,6 +16,7 @@ namespace ESD6NL.DriverSystem.DAL
         {
             modelBuilder.Entity<User>().HasIndex(u => new {u.email, u.userName}).IsUnique();
             modelBuilder.Entity<Invoice>().HasKey(i => i.invoiceNr);
+            modelBuilder.Entity<Car>().HasIndex(c => c.licensePlate).IsUnique();
         }
 
         public DbSet<Translation> Translations { get; set; }

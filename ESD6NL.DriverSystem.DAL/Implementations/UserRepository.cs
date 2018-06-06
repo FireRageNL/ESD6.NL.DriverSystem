@@ -9,7 +9,6 @@ namespace ESD6NL.DriverSystem.DAL
 
         public UserRepository(DriverSystemContext context) : base(context)
         {
-          
         }
 
         public User saveUserInDB(User usr)
@@ -19,8 +18,7 @@ namespace ESD6NL.DriverSystem.DAL
 
         public User getUserFromDatabase(string username)
         {
-            User usr = (from x in _context.Users where x.userName == username select x).SingleOrDefault();
-            return usr;
+            return _context.Users.Include(x => x.cars).SingleOrDefault(x => x.userName == username);
         }
     }
 }

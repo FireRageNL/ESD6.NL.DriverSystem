@@ -15,11 +15,9 @@ namespace ESD6NL.DriverSystem.Controllers
     public class RegistrationController : BaseController
     {
        
-        private IUserService _regSerivce;
 
-        public RegistrationController(IUserService regSerivce, ITranslationService ts) : base(ts)
+        public RegistrationController(IUserService regSerivce, ITranslationService ts) : base(ts,regSerivce)
         {
-            _regSerivce = regSerivce;
         }
 
         /// <summary>
@@ -41,7 +39,7 @@ namespace ESD6NL.DriverSystem.Controllers
         public IActionResult Index(RegistrationModel model)
         {
             User toAdd = new User {email = model.Email, userName = model.Username, password = model.Password, firstName = model.FirstName, lastName = model.LastName, citizenServiceNumber = model.CitizenServiceNumber};
-            _regSerivce.createUser(toAdd);
+            _userService.createUser(toAdd);
             return RedirectToAction("Index", "Home");
         }
     }
