@@ -8,6 +8,7 @@ using System.Net.Http;
 using ESD6NL.DriverSystem.BLL.Helpers;
 using ESD6NL.DriverSystem.BLL.RestModels;
 using Newtonsoft.Json;
+using System.Net.Http.Headers;
 
 namespace ESD6NL.DriverSystem.BLL.Implementations
 {
@@ -34,7 +35,7 @@ namespace ESD6NL.DriverSystem.BLL.Implementations
             invoiceModels.ForEach(i => foundInvoicesJson.Add(new Invoice()
             {
                 invoiceNr = i.invoiceNr,
-                paymentStatus = i.paymentStatus,
+                paymentStatus = (PaymentStatus) Enum.Parse(typeof(PaymentStatus),i.paymentStatus),
                 period = i.date,
                 totalAmount = i.totalAmount
 
@@ -64,6 +65,22 @@ namespace ESD6NL.DriverSystem.BLL.Implementations
             Invoice invoice = _repo.GetSpecificInvoice(paidInvoiceId);
             invoice.paymentStatus = 0;
             _repo.Update(invoice);
+
+            RestInvoiceModel restInvoiceModel = new RestInvoiceModel();
+            restInvoiceModel.invoiceNr = invoice.invoiceNr;
+            restInvoiceModel.paymentStatus = "PAID";
+
+            var JsonObject = JsonConvert.SerializeObject(restInvoiceModel);
+            var httpContent = new StringContent(JsonObject);
+            httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+            HttpResponseMessage response = RestHelper.AasHttpClient().PutAsync($"invoices", httpContent).Result;
+            response.EnsureSuccessStatusCode();
+        }
+
+        public Invoice getLastInvoice()
+        {
+            return _repo.GetLastInvoice();
         }
     }
 }

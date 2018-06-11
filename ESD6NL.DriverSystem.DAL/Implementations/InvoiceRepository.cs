@@ -27,5 +27,10 @@ namespace ESD6NL.DriverSystem.DAL.Implementations
         {
             return (from x in _context.Invoices where x.invoiceNr == invoiceId select x).SingleOrDefault();
         }
+
+        public Invoice GetLastInvoice()
+        {
+            return (from x in _context.Invoices orderby x.period select x).First();
+        }
     }
 }

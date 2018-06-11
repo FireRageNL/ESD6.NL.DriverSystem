@@ -100,7 +100,7 @@ namespace ESD6NL.DriverSystem.Controllers
         {
             var invoice = _invoiceService.GetInvoice(id);
             if (invoice == null) return NotFound();
-            var invoiceViewModel = FillInvoiceViewModel(invoice);
+            var invoiceViewModel = InvoiceHelpercs.FillInvoiceViewModel(invoice);
 
             return View(invoiceViewModel);
         }
@@ -110,19 +110,6 @@ namespace ESD6NL.DriverSystem.Controllers
             UserViewModel userViewModel = new UserViewModel();
             userViewModel.invoices.AddRange(invoices);
             return userViewModel;
-        }
-
-        public InvoiceViewModel FillInvoiceViewModel(Invoice invoice)
-        {
-            InvoiceViewModel invoiceViewModel = new InvoiceViewModel
-            {
-                invoiceId = invoice.invoiceNr,
-                date = invoice.period,
-                totalKm = invoice.totalKm,
-                totalEuros = invoice.totalAmount.ToString("0#.##", CultureInfo.InvariantCulture),
-                rows = invoice.rows
-            };
-            return invoiceViewModel;
         }
     }
 }

@@ -77,8 +77,6 @@ namespace ESD6NL.DriverSystem.BLL
             if (usr.lastSyncTime >= DateTime.Now.AddDays(-1)) return;
            _carService.updateCarsForUser(usr);
             _repo.Update(usr);
-
-
         }
     }
 }
