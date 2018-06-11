@@ -35,11 +35,12 @@ namespace ESD6NL.DriverSystem.BLL.Helpers
 
             if (jwtToken == null)
             {
-                //HttpResponseMessage response =
-                //    aasClient.PostAsync($"identify", ConvertToSendableHttpObject(Identity)).Result;
-                //response.EnsureSuccessStatusCode();
-                //string msg = response.Content.ReadAsStringAsync().Result;
-                jwtToken = "lol";
+                HttpResponseMessage response =
+                    aasClient.GetAsync($"authenticate/" + Identity).Result;
+                response.EnsureSuccessStatusCode();
+                string msg = response.Content.ReadAsStringAsync().Result;
+                Dictionary<string,string> deserialzed = JsonConvert.DeserializeObject<Dictionary<string, string>>(msg);
+                jwtToken = deserialzed["Token"];
             }
 
             aasClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer",jwtToken);
