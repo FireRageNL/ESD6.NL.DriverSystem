@@ -5,7 +5,6 @@ pipeline{
             steps {
                 sh 'dotnet restore'
 				sh 'dotnet msbuild'
-				sh 'sshpass -p \'student\' ssh -o StrictHostKeyChecking=no student@192.168.25.122 "./updateDriver.sh"'
             }
         }
 		stage('Test project'){
@@ -25,6 +24,8 @@ pipeline{
 				withCredentials([usernamePassword(credentialsId: 'docker', passwordVariable: 'dockerPassword', usernameVariable: 'dockerUser')]) {
 					sh "docker login -u ${env.dockerUser} -p ${env.dockerPassword}"
 					sh 'docker push esd6nl/driver'
+					sh 'sshpass -p \'student\' ssh -o StrictHostKeyChecking=no student@192.168.25.122 "./updateDriver.sh"'
+
 			}
 			}
 		}
