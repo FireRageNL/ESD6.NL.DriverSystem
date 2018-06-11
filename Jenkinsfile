@@ -25,6 +25,10 @@ pipeline{
 					sh "docker login -u ${env.dockerUser} -p ${env.dockerPassword}"
 					sh 'docker push esd6nl/driver'
 			}
+			sshagent(credentials: ['38e51386-2cad-4c7e-b7a2-6d1c282d49f4']){
+				sh 'ssh student@192.168.25.122'
+				sh 'touch testfile'
+			}
 			}
 		}
     }
