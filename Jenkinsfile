@@ -5,8 +5,7 @@ pipeline{
             steps {
                 sh 'dotnet restore'
 				sh 'dotnet msbuild'
-				sh 'ssh -T student@192.168.25.122'
-				sh 'touch testfile'
+				sh 'sshpass -p \'student\' ssh student@192.168.25.122 "ls"'
             }
         }
 		stage('Test project'){
