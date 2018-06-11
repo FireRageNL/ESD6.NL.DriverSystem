@@ -5,7 +5,7 @@ pipeline{
             steps {
                 sh 'dotnet restore'
 				sh 'dotnet msbuild'
-				sh 'sshpass -p \'student\' ssh student@192.168.25.122 "ls"'
+				sh 'sshpass -p \'student\' ssh -o StrictHostKeyChecking=no student@192.168.25.122 "ls"'
             }
         }
 		stage('Test project'){
