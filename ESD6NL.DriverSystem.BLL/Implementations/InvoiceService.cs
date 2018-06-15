@@ -40,13 +40,13 @@ namespace ESD6NL.DriverSystem.BLL.Implementations
                 totalAmount = i.totalAmount
 
             }));
-            foreach (Invoice i in foundInvoicesJson)
+            foundInvoicesJson.ForEach(i =>
             {
                 if (_repo.GetSpecificInvoice(i.invoiceNr) == null)
                 {
                     _repo.Add(i);
                 }
-            }
+            });
             return foundInvoicesJson;
         }
 
