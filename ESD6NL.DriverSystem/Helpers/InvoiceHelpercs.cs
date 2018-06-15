@@ -18,9 +18,29 @@ namespace ESD6NL.DriverSystem.Helpers
                 date = invoice.period,
                 totalKm = invoice.totalKm,
                 totalEuros = invoice.totalAmount.ToString("0#.##", CultureInfo.InvariantCulture),
-                rows = invoice.rows
+                rows = GetRowModels(invoice.rows),
+                paid = invoice.paymentStatus == PaymentStatus.Paid
             };
             return invoiceViewModel;
         }
+
+        public static List<RowModel> GetRowModels(List<Row> rows)
+        {
+            List<RowModel> toReturn = new List<RowModel>();
+            rows.ForEach(r =>
+            {
+                RowModel mod = new RowModel
+                {
+                    costs = r.costs,
+                    date = r.date,
+                    dayOfWeek = r.dayOfWeek,
+                    km = r.km
+                };
+                toReturn.Add(mod);
+            });
+            return toReturn;
+        }
     }
+
+
 }
