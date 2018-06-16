@@ -12,6 +12,7 @@ namespace ESD6NL.DriverSystem.Models
         public string dayOfWeek;
         public decimal km;
         public decimal costs;
+        public int rowId;
 
         public RowModel(DateTime date, string dayOfWeek, decimal km, decimal costs)
         {

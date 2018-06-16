@@ -25,7 +25,7 @@
                 <text>
 
                     <tr>
-                        <td>@row.date.ToString("dd/MM/yyyy")</td>
+                        <td><a asp-action="Map" asp-controller="Invoice" asp-route-id="@row.rowId">@row.date.ToString("dd/MM/yyyy")</a></td>
                         <td>@row.dayOfWeek</td>
                         <td>@row.km.ToString("F")</td>
                         <td>@row.costs.ToString("C", CultureInfo.GetCultureInfo("nl-NL"))</td>

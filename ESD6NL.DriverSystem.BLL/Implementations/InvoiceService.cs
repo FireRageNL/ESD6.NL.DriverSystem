@@ -16,13 +16,16 @@ namespace ESD6NL.DriverSystem.BLL.Implementations
     {
         private IInvoiceRepository _repo;
 
+        private IRowRepository _rowRepo;
+
         /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="repo"></param>
-        public InvoiceService(IInvoiceRepository repo)
+        public InvoiceService(IInvoiceRepository repo, IRowRepository rowRepo)
         {
             _repo = repo;
+            _rowRepo = rowRepo;
         }
 
         public List<Invoice> GetAllInvoices(long citizenServiceNumber)

@@ -34,7 +34,8 @@ namespace ESD6NL.DriverSystem.Helpers
                     costs = r.costs,
                     date = r.date,
                     dayOfWeek = r.dayOfWeek,
-                    km = r.km
+                    km = r.km,
+                    rowId = r.rowId
                 };
                 toReturn.Add(mod);
             });
