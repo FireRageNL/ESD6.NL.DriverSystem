@@ -51,7 +51,7 @@ namespace ESD6.NL.DriverSystem.UnitTests
                     licensePlate = "123asdf"
                 }
             };
-            mock.Setup(garage => garage.getCarsForUser(1234567890L)).Returns(cars);
+            mock.Setup(garage => garage.getCarsForUser(88888888888)).Returns(cars);
             _carService = new CarService(mock.Object);
         }
 
@@ -66,13 +66,13 @@ namespace ESD6.NL.DriverSystem.UnitTests
             "An id is used that does not yet excist.")]
         public void getSpecificCar_FakeCar_ErrorMessage()
         {
-            var testvalue = _carService.GetCar(2).carTrackerID;
+            var testvalue = _carService.GetCar(2000).carTrackerID;
         }
 
         [TestMethod]
         public void getCaforspecificUser_validCSN_ReturnsTwo()
         {
-            Assert.AreEqual(2, _carService.GetCarsOfUserFromAAS(1234567890L).ToList().Count);
+            Assert.AreEqual(2, _carService.GetCarsOfUserFromAAS(88888888888).ToList().Count);
         }
 
         [TestMethod]
@@ -80,7 +80,7 @@ namespace ESD6.NL.DriverSystem.UnitTests
         {
             _carService.updateCarsForUser(new User()
             {
-                citizenServiceNumber = 1234567890L,
+                citizenServiceNumber = 88888888888,
                 cars = new List<Car>()
             });
         }
