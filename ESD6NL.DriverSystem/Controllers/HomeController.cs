@@ -13,14 +13,17 @@ using ESD6NL.DriverSystem.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Routing;
 
 namespace ESD6NL.DriverSystem.Controllers
 {
     public class HomeController : BaseController
     {
-        public HomeController(IUserService userService, ITranslationService ts) : base(ts,userService)
+        private IInvoiceService _invoiceService;
+        public HomeController(IUserService userService, IInvoiceService invoiceService, ITranslationService ts) : base(ts,userService)
         {
             _userService = userService;
+            _invoiceService = invoiceService;
         }
 
         public IActionResult Index()
@@ -69,5 +72,17 @@ namespace ESD6NL.DriverSystem.Controllers
         {
             return View();
         }
-    }
+
+        public IActionResult PayLastInvoice()
+        {
+            var invoice = _invoiceService.getLastInvoice();
+            if (invoice == null) return NotFound();
+            var invoiceViewModel = InvoiceHelpercs.FillInvoiceViewModel(invoice);
+
+            return RedirectToAction("Details", new RouteValueDictionary(
+            new
+            {
+                controller = "Invoice", action = "Details", Id = invoiceViewModel.invoiceId })); ;
+            }
+        }
 }

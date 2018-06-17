@@ -12,9 +12,10 @@ using System;
 namespace ESD6NL.DriverSystem.DAL.Migrations
 {
     [DbContext(typeof(DriverSystemContext))]
-    partial class DriverSystemContextModelSnapshot : ModelSnapshot
+    [Migration("20180616063732_routes")]
+    partial class routes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,7 +35,7 @@ namespace ESD6NL.DriverSystem.DAL.Migrations
 
                     b.Property<string>("Street");
 
-                    b.Property<string>("StreetNr");
+                    b.Property<int>("StreetNr");
 
                     b.HasKey("AddressID");
 
@@ -295,8 +296,7 @@ namespace ESD6NL.DriverSystem.DAL.Migrations
             modelBuilder.Entity("ESD6NL.DriverSystem.Entities.User", b =>
                 {
                     b.Property<int>("userID")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<int?>("AddressID");
 

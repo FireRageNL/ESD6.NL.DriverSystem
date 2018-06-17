@@ -15,5 +15,6 @@ namespace ESD6NL.DriverSystem.Models
         public Address address { get; set; }
         public List<Car> cars { get; set; } = new List<Car>();
         public List<Invoice> invoices { get; set; } = new List<Invoice>();
+        public bool IsCheckedForPayment { get; set; }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data;
 using System.Text;
 
@@ -12,7 +13,7 @@ namespace ESD6NL.DriverSystem.Entities
         {
             //Amazing empty constructor 
         }
-
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int userID { get; set; }
         public string email { get; set; }
         public string userName { get; set; }

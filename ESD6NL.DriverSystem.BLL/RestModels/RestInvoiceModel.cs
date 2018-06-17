@@ -9,7 +9,7 @@ namespace ESD6NL.DriverSystem.BLL.RestModels
     {
         public long invoiceNr { get; set; }
 
-        public PaymentStatus paymentStatus { get; set; }
+        public string paymentStatus { get; set; }
 
         public DateTime date { get; set; }
 

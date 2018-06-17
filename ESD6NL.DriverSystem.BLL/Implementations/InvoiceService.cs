@@ -8,6 +8,7 @@ using System.Net.Http;
 using ESD6NL.DriverSystem.BLL.Helpers;
 using ESD6NL.DriverSystem.BLL.RestModels;
 using Newtonsoft.Json;
+using System.Net.Http.Headers;
 
 namespace ESD6NL.DriverSystem.BLL.Implementations
 {
@@ -15,13 +16,16 @@ namespace ESD6NL.DriverSystem.BLL.Implementations
     {
         private IInvoiceRepository _repo;
 
+        private IRowRepository _rowRepo;
+
         /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="repo"></param>
-        public InvoiceService(IInvoiceRepository repo)
+        public InvoiceService(IInvoiceRepository repo, IRowRepository rowRepo)
         {
             _repo = repo;
+            _rowRepo = rowRepo;
         }
 
         public List<Invoice> GetAllInvoices(long citizenServiceNumber)
@@ -34,18 +38,18 @@ namespace ESD6NL.DriverSystem.BLL.Implementations
             invoiceModels.ForEach(i => foundInvoicesJson.Add(new Invoice()
             {
                 invoiceNr = i.invoiceNr,
-                paymentStatus = i.paymentStatus,
+                paymentStatus = (PaymentStatus) Enum.Parse(typeof(PaymentStatus),i.paymentStatus),
                 period = i.date,
                 totalAmount = i.totalAmount
 
             }));
-            foreach (Invoice i in foundInvoicesJson)
+            foundInvoicesJson.ForEach(i =>
             {
                 if (_repo.GetSpecificInvoice(i.invoiceNr) == null)
                 {
                     _repo.Add(i);
                 }
-            }
+            });
             return foundInvoicesJson;
         }
 
@@ -64,6 +68,22 @@ namespace ESD6NL.DriverSystem.BLL.Implementations
             Invoice invoice = _repo.GetSpecificInvoice(paidInvoiceId);
             invoice.paymentStatus = 0;
             _repo.Update(invoice);
+
+            RestInvoiceModel restInvoiceModel = new RestInvoiceModel();
+            restInvoiceModel.invoiceNr = invoice.invoiceNr;
+            restInvoiceModel.paymentStatus = "PAID";
+
+            var JsonObject = JsonConvert.SerializeObject(restInvoiceModel);
+            var httpContent = new StringContent(JsonObject);
+            httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+            HttpResponseMessage response = RestHelper.AasHttpClient().PutAsync($"invoices", httpContent).Result;
+            response.EnsureSuccessStatusCode();
+        }
+
+        public Invoice getLastInvoice()
+        {
+            return _repo.GetLastInvoice();
         }
     }
 }

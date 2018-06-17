@@ -10,5 +10,6 @@ namespace ESD6NL.DriverSystem.BLL.Interfaces
         List<Invoice> GetAllInvoices(long citizenServiceNumber);
         Invoice GetInvoice(int id);
         void updateInvoice(int paidInvoiceId);
+        Invoice getLastInvoice();
     }
 }

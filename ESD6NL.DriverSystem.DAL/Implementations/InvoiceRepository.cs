@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace ESD6NL.DriverSystem.DAL.Implementations
 {
@@ -25,7 +26,12 @@ namespace ESD6NL.DriverSystem.DAL.Implementations
         /// <returns></returns>
         public Invoice GetSpecificInvoice(long invoiceId)
         {
-            return (from x in _context.Invoices where x.invoiceNr == invoiceId select x).SingleOrDefault();
+            return _context.Invoices.Where(x => x.invoiceNr == invoiceId).Include(y => y.rows).SingleOrDefault();
+        }
+
+        public Invoice GetLastInvoice()
+        {
+            return (from x in _context.Invoices orderby x.period select x).First();
         }
     }
 }

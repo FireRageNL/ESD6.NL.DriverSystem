@@ -14,6 +14,7 @@ namespace ESD6NL.DriverSystem.Entities
         public Decimal totalAmount { get; set; }
         public string filePath { get; set; }
 
-        public List<Row> rows { get; set; }
+        public List<Row> rows { get; set; } = new List<Row>();
+
     }
 }

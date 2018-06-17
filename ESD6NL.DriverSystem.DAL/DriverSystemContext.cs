@@ -15,6 +15,7 @@ namespace ESD6NL.DriverSystem.DAL
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>().HasIndex(u => new {u.email, u.userName}).IsUnique();
+            modelBuilder.Entity<User>().Property(u => u.userID).ValueGeneratedOnAdd();
             modelBuilder.Entity<Invoice>().HasKey(i => i.invoiceNr);
             modelBuilder.Entity<Car>().HasIndex(c => c.licensePlate).IsUnique();
         }
@@ -27,5 +28,7 @@ namespace ESD6NL.DriverSystem.DAL
         public DbSet<Row> Row { get; set; }
         public DbSet<RDW> RDW { get; set; }
         public DbSet<RDWFuel> RDWFuel { get; set; }
+
+        public DbSet<RoutePoint> RoutePoints { get; set; }
     }
 }

@@ -42,6 +42,7 @@ namespace ESD6NL.DriverSystem.BLL
             toSave.cars = _carService.GetCarsOfUserFromAAS(toSave.citizenServiceNumber) as List<Car>;
             toSave.Language = "NLD";
             toSave.lastSyncTime = DateTime.Now;
+            toSave.invoices = new List<Invoice>();
             return _repo.Add(toSave);
         }
 
@@ -76,9 +77,8 @@ namespace ESD6NL.DriverSystem.BLL
         {
             if (usr.lastSyncTime >= DateTime.Now.AddDays(-1)) return;
            _carService.updateCarsForUser(usr);
+            usr.lastSyncTime = DateTime.Now;
             _repo.Update(usr);
-
-
         }
     }
 }

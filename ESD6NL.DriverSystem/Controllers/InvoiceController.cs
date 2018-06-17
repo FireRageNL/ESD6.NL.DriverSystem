@@ -21,15 +21,17 @@ namespace ESD6NL.DriverSystem.Controllers
     public class InvoiceController : BaseController
     {
         private readonly IInvoiceService _invoiceService;
+        private readonly IRowService _rowService;
 
         /// <summary>
         /// Contructor
         /// </summary>
         /// <param name="invoiceService"></param>
-        public InvoiceController(IInvoiceService invoiceService, ITranslationService ts, IUserService userService) : base(ts,userService)
+        public InvoiceController(IInvoiceService invoiceService, ITranslationService ts, IUserService userService, IRowService rowService) : base(ts,userService)
         {
             _invoiceService = invoiceService;
             _userService = userService;
+            _rowService = rowService;
         }
 
         /// <summary>
@@ -43,6 +45,21 @@ namespace ESD6NL.DriverSystem.Controllers
             var userViewModel = FillUserViewModel(invoice);
 
             return View(userViewModel);
+        }
+
+        public IActionResult Map(int id)
+        {
+            var row = _rowService.getSpecificRow(id);
+            RowModel model = new RowModel
+            {
+                costs = row.costs,
+                rowId = row.rowId,
+                route = row.navigatedRoutes,
+                dayOfWeek = row.dayOfWeek,
+                date = row.date,
+                km = row.km
+            };
+            return View(model);
         }
 
         public IActionResult PaymentProcessed()
@@ -100,7 +117,7 @@ namespace ESD6NL.DriverSystem.Controllers
         {
             var invoice = _invoiceService.GetInvoice(id);
             if (invoice == null) return NotFound();
-            var invoiceViewModel = FillInvoiceViewModel(invoice);
+            var invoiceViewModel = InvoiceHelpercs.FillInvoiceViewModel(invoice);
 
             return View(invoiceViewModel);
         }
@@ -110,19 +127,6 @@ namespace ESD6NL.DriverSystem.Controllers
             UserViewModel userViewModel = new UserViewModel();
             userViewModel.invoices.AddRange(invoices);
             return userViewModel;
-        }
-
-        public InvoiceViewModel FillInvoiceViewModel(Invoice invoice)
-        {
-            InvoiceViewModel invoiceViewModel = new InvoiceViewModel
-            {
-                invoiceId = invoice.invoiceNr,
-                date = invoice.period,
-                totalKm = invoice.totalKm,
-                totalEuros = invoice.totalAmount.ToString("0#.##", CultureInfo.InvariantCulture),
-                rows = invoice.rows
-            };
-            return invoiceViewModel;
         }
     }
 }

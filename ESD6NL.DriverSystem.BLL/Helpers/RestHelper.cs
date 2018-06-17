@@ -12,6 +12,8 @@ namespace ESD6NL.DriverSystem.BLL.Helpers
         private static HttpClient aasClient;
         private static HttpClient rdwClient;
         private static HttpClient rdwFuelClient;
+        private static readonly string Identity = "oSCOrcWPw3tbNxp802mR";
+        private static string jwtToken;
 
         public static StringContent ConvertToSendableHttpObject(object T)
         {
@@ -23,10 +25,26 @@ namespace ESD6NL.DriverSystem.BLL.Helpers
 
         public static HttpClient AasHttpClient()
         {
-            return aasClient ?? (aasClient = new HttpClient
+            if (aasClient == null)
             {
-                BaseAddress = new Uri("http://192.168.25.122:8080/AccountAdministrationSystem/api/")
-            });
+                aasClient = new HttpClient()
+                {
+                    BaseAddress = new Uri("http://192.168.25.122:8080/AccountAdministrationSystem/api/")
+                };
+            }
+
+            if (jwtToken == null)
+            {
+                HttpResponseMessage response =
+                    aasClient.GetAsync($"authenticate/" + Identity).Result;
+                response.EnsureSuccessStatusCode();
+                string msg = response.Content.ReadAsStringAsync().Result;
+                Dictionary<string,string> deserialzed = JsonConvert.DeserializeObject<Dictionary<string, string>>(msg);
+                jwtToken = deserialzed["Token"];
+            }
+
+            aasClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer",jwtToken);
+            return aasClient;
         }
 
         public static HttpClient RdwHttpClient()
