@@ -13,7 +13,7 @@ namespace ESD6NL.DriverSystem.Models
         public Decimal totalKm { get; set; }
         public string totalEuros { get; set; }
         public List<RowModel> rows { get; set; }
-
         public bool paid { get; set; }
+        public PaymentStatus paymentStatus { get; set; }
     }
 }
