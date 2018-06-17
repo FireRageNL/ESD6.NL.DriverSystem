@@ -15,6 +15,7 @@ namespace ESD6NL.DriverSystem.Models
         public decimal costs;
         public int rowId;
         public List<RoutePoint> route;
+        public string InvoiceId;
 
         public RowModel(DateTime date, string dayOfWeek, decimal km, decimal costs)
         {

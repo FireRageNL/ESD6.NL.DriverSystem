@@ -49,6 +49,9 @@ namespace ESD6NL.DriverSystem.Controllers
 
         public IActionResult Map(int id)
         {
+            string referer = Request.Headers["Referer"];
+            string[] refe = referer.Split("/");
+            string invoiceId = refe.Last();
             var row = _rowService.getSpecificRow(id);
             RowModel model = new RowModel
             {
@@ -57,7 +60,8 @@ namespace ESD6NL.DriverSystem.Controllers
                 route = row.navigatedRoutes,
                 dayOfWeek = row.dayOfWeek,
                 date = row.date,
-                km = row.km
+                km = row.km,
+                InvoiceId = invoiceId
             };
             return View(model);
         }

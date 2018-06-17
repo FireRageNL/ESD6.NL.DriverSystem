@@ -1,15 +1,47 @@
 ﻿@using ESD6NL.DriverSystem.Entities
+@using ESD6NL.DriverSystem.Helpers
 @model ESD6NL.DriverSystem.Models.RowModel
 @{
     ViewData["Title"] = "Map";
 }
 
-<h2>Map</h2>
+<h2>@Html.getTerm("Map")</h2>
 
+<a asp-action="Details" asp-route-id="@Model.InvoiceId">@Html.getTerm("Terug")</a>
+@Html.getTerm("Here you see the roads you've traveled on") @Model.date.ToString("dd/MM/yyyy")
+<div id="map" style="height:700px"></div>
+<script>
 
-LOOK AT THIS BOOTYFULL MAP; DEEZ R TEH POINT DRIVEN AS WELL SO NAU U CAN VISUALISE IT
-@foreach (RoutePoint r in @Model.route)
-{
-    <span>Lat = @r.Lat, long = @r.Lon</span>
+    // This example creates a 2-pixel-wide red polyline showing the path of
+    // the first trans-Pacific flight between Oakland, CA, and Brisbane,
+    // Australia which was made by Charles Kingsford Smith.
 
-}
+    function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 8,
+            center: {lat: 52, lng: 5},
+            mapTypeId: 'terrain'
+        });
+
+        var test;
+
+        var flightPlanCoordinates = [
+            @foreach (RoutePoint r in Model.route)
+            {
+                <text>{lat: @r.Lat, lng: @r.Lon}, </text>
+            }
+        ];
+        var flightPath = new google.maps.Polyline({
+            path: flightPlanCoordinates,
+            geodesic: true,
+            strokeColor: '#FF0000',
+            strokeOpacity: 1.0,
+            strokeWeight: 2
+        });
+
+        flightPath.setMap(map);
+    }
+</script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAZeyQ2kJ4Oq9vSXD2sKXQdiKH7R9ojANk&callback=initMap">
+</script>
