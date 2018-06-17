@@ -45,7 +45,7 @@ namespace ESD6NL.DriverSystem.BLL.Implementations
             userCars.ToList().ForEach(c =>
             {
                 Car cr = GetCar(c.CarID);
-                filledCars.Add(cr);
+                filledCars.Add(cr ?? c);
             });
             return filledCars;
         }

@@ -61,28 +61,28 @@ namespace ESD6.NL.DriverSystem.UnitTests
             Assert.AreEqual("1", _carService.GetCar(1).carTrackerID);
         }
 
-        //[TestMethod]
-        //[ExpectedException(typeof(NullReferenceException), 
-        //    "An id is used that does not yet excist.")]
-        //public void getSpecificCar_FakeCar_ErrorMessage()
-        //{
-        //    var testvalue = _carService.GetCar(2).carTrackerID;
-        //}
+        [TestMethod]
+        [ExpectedException(typeof(NullReferenceException),
+            "An id is used that does not yet excist.")]
+        public void getSpecificCar_FakeCar_ErrorMessage()
+        {
+            var testvalue = _carService.GetCar(2).carTrackerID;
+        }
 
-        //[TestMethod]
-        //public void getCaforspecificUser_validCSN_ReturnsTwo()
-        //{
-        //    Assert.AreEqual(2, _carService.GetCarsOfUserFromAAS(1234567890L).ToList().Count);
-        //}
+        [TestMethod]
+        public void getCaforspecificUser_validCSN_ReturnsTwo()
+        {
+            Assert.AreEqual(2, _carService.GetCarsOfUserFromAAS(1234567890L).ToList().Count);
+        }
 
-        //[TestMethod]
-        //public void updateCarsForUser_validCars()
-        //{
-        //    _carService.updateCarsForUser(new User()
-        //    {
-        //        citizenServiceNumber = 1234567890L,
-        //        cars = new List<Car>()
-        //    });
-        //}
+        [TestMethod]
+        public void updateCarsForUser_validCars()
+        {
+            _carService.updateCarsForUser(new User()
+            {
+                citizenServiceNumber = 1234567890L,
+                cars = new List<Car>()
+            });
+        }
     }
 }

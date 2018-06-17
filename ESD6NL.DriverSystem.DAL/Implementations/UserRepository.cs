@@ -20,5 +20,10 @@ namespace ESD6NL.DriverSystem.DAL
         {
             return _context.Users.Include(x => x.cars).SingleOrDefault(x => x.userName == username);
         }
+
+        public User getUserFromDatabase(long csn)
+        {
+            return _context.Users.Include(x => x.cars).SingleOrDefault(x => x.citizenServiceNumber == csn);
+        }
     }
 }

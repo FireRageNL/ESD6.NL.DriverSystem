@@ -49,6 +49,10 @@
                 <input type="submit" value=@Html.getTerm("RegisterButton") class="btn btn-default" />
             </div>
         </form>
+        @if (ViewData["Error"] != null)
+        {
+            <span>@ViewData["Error"]</span>
+        }
     </div>
 </div>
 
