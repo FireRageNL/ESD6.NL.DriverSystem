@@ -23,10 +23,10 @@ namespace ESD6.NL.DriverSystem.UnitTests
                 period = new System.DateTime(),
                 totalKm = 1,
                 totalAmount = 1,
-                filePath = "fakefilepath.file"
+                filePath = "fakefilepath.file",
             });
             mock.Setup(garage => garage.Add(It.IsAny<Invoice>())).Returns((Invoice i) => i);
-            _invoiceService = new InvoiceService(mock.Object);
+            _invoiceService = new InvoiceService(mock.Object,null);
         }
 
         [TestMethod]

@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ESD6NL.DriverSystem.DAL.Implementations
 {
-    class RowRepository : GenericRepository<Row>, IRowRepository
+    public class RowRepository : GenericRepository<Row>, IRowRepository
     {
         public RowRepository(DriverSystemContext context) : base(context)
         {

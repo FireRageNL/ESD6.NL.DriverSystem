@@ -1,4 +1,5 @@
-﻿
+﻿@using ESD6NL.DriverSystem.Entities
+@model ESD6NL.DriverSystem.Models.RowModel
 @{
     ViewData["Title"] = "Map";
 }
@@ -6,4 +7,9 @@
 <h2>Map</h2>
 
 
-LOOK AT THIS BOOTYFULL MAP
+LOOK AT THIS BOOTYFULL MAP; DEEZ R TEH POINT DRIVEN AS WELL SO NAU U CAN VISUALISE IT
+@foreach (RoutePoint r in @Model.route)
+{
+    <span>Lat = @r.Lat, long = @r.Lon</span>
+
+}

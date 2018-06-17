@@ -5,7 +5,7 @@ using ESD6NL.DriverSystem.Entities;
 
 namespace ESD6NL.DriverSystem.DAL.Interfaces
 {
-    interface IRowRepository : IGenericRepository<Row>
+    public interface IRowRepository : IGenericRepository<Row>
     {
         Row findRowById(int id);
     }

@@ -21,15 +21,17 @@ namespace ESD6NL.DriverSystem.Controllers
     public class InvoiceController : BaseController
     {
         private readonly IInvoiceService _invoiceService;
+        private readonly IRowService _rowService;
 
         /// <summary>
         /// Contructor
         /// </summary>
         /// <param name="invoiceService"></param>
-        public InvoiceController(IInvoiceService invoiceService, ITranslationService ts, IUserService userService) : base(ts,userService)
+        public InvoiceController(IInvoiceService invoiceService, ITranslationService ts, IUserService userService, IRowService rowService) : base(ts,userService)
         {
             _invoiceService = invoiceService;
             _userService = userService;
+            _rowService = rowService;
         }
 
         /// <summary>
@@ -47,7 +49,17 @@ namespace ESD6NL.DriverSystem.Controllers
 
         public IActionResult Map(int id)
         {
-            return View();
+            var row = _rowService.getSpecificRow(id);
+            RowModel model = new RowModel
+            {
+                costs = row.costs,
+                rowId = row.rowId,
+                route = row.navigatedRoutes,
+                dayOfWeek = row.dayOfWeek,
+                date = row.date,
+                km = row.km
+            };
+            return View(model);
         }
 
         public IActionResult PaymentProcessed()

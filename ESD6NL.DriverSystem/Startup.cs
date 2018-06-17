@@ -47,6 +47,7 @@ namespace ESD6NL.DriverSystem
             services.AddTransient<ICarRepository, CarRepository>();
             services.AddTransient<ITranslationRepository, TranslationRepository>();
             services.AddTransient<IRowRepository, RowRepository>();
+            services.AddTransient<IRowService, RowService>();
             services.AddTransient<ITranslationService, TranslationService>();
 
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)

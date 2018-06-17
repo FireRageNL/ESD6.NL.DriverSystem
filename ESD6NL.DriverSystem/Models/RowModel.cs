@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ESD6NL.DriverSystem.Entities;
 
 namespace ESD6NL.DriverSystem.Models
 {
@@ -13,6 +14,7 @@ namespace ESD6NL.DriverSystem.Models
         public decimal km;
         public decimal costs;
         public int rowId;
+        public List<RoutePoint> route;
 
         public RowModel(DateTime date, string dayOfWeek, decimal km, decimal costs)
         {

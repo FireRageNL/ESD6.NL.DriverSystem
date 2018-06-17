@@ -9,7 +9,7 @@ namespace ESD6NL.DriverSystem.Entities
         public int AddressID { get; set; }
         public string City { get; set; }
         public string Street { get; set; }
-        public int StreetNr { get; set; }
+        public string StreetNr { get; set; }
         public string PostalCode { get; set; }
         public string Country { get; set; }
 

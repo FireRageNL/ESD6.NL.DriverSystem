@@ -35,7 +35,8 @@ namespace ESD6NL.DriverSystem.Helpers
                     date = r.date,
                     dayOfWeek = r.dayOfWeek,
                     km = r.km,
-                    rowId = r.rowId
+                    rowId = r.rowId,
+                    route = r.navigatedRoutes
                 };
                 toReturn.Add(mod);
             });

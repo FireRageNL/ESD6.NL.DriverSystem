@@ -37,7 +37,10 @@ namespace ESD6NL.DriverSystem.BLL.Implementations
 
         public IEnumerable<Car> GetCarsOfUserFromAAS(long csn)
         {
-            IEnumerable<Car> userCars = _repo.getCarsForUser(csn);
+            HttpResponseMessage response = RestHelper.AasHttpClient().GetAsync($"cars/" + csn).Result;
+            response.EnsureSuccessStatusCode();
+            var foundCars = response.Content.ReadAsStringAsync().Result;
+            var userCars = JsonConvert.DeserializeObject<IEnumerable<Car>>(foundCars);
             List<Car> filledCars = new List<Car>();
             userCars.ToList().ForEach(c =>
             {
