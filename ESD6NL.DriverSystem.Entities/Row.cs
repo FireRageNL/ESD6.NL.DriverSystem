@@ -11,6 +11,7 @@ namespace ESD6NL.DriverSystem.Entities
         public string dayOfWeek { get; set; }
         public Decimal km { get; set; }
         public Decimal costs { get; set; }
+        public List<RoutePoint> navigatedRoutes { get; set; }
 
     }
 }

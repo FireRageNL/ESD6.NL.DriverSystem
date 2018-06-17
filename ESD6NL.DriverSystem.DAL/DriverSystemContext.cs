@@ -27,5 +27,7 @@ namespace ESD6NL.DriverSystem.DAL
         public DbSet<Row> Row { get; set; }
         public DbSet<RDW> RDW { get; set; }
         public DbSet<RDWFuel> RDWFuel { get; set; }
+
+        public DbSet<RoutePoint> RoutePoints { get; set; }
     }
 }

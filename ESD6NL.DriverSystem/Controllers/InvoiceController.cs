@@ -45,6 +45,11 @@ namespace ESD6NL.DriverSystem.Controllers
             return View(userViewModel);
         }
 
+        public IActionResult Map(int id)
+        {
+            return View();
+        }
+
         public IActionResult PaymentProcessed()
         {
             string auth = "ncFfxRN13LECpr3gI2SXXAWJpv3CW5nC_SiovkaDuPdVhrVx_TBAs0me9Hu";
