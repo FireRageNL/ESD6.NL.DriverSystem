@@ -4,8 +4,13 @@
 @{
     ViewData["Title"] = "InvoiceDetail";
 }
-
-<h2>@Html.getTerm("Factuur") @Html.DisplayFor(model => model.invoiceId)</h2>
+<div>
+    <h2>@Html.getTerm("Factuur ") @Html.DisplayFor(model => model.invoiceId)</h2>
+</div>
+<div>
+    <h4>@Html.getTerm("Totale kosten    ") @Html.DisplayFor(model => model.totalEuros)</h4>
+    <h4>@Html.getTerm("Betaling status  ") @Html.DisplayFor(model => model.paymentStatus)</h4>
+</div>
 
 <table class="table  table table-striped table-bordered table-responsive table-condensed">
     <thead>
@@ -19,8 +24,8 @@
 
     <tbody>
         @{
-            @*foreach (var row in Model.rows)
-                    {
+            foreach (var row in Model.rows)
+            {
                         <text>
 
                 <tr>
@@ -30,9 +35,10 @@
                     <td>@row.costs</td>
                 </tr>
 
-                        </text>*@
+                        </text>
 
-        }
+                }
+            }
     </tbody>
 </table>
 
